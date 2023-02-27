@@ -26,6 +26,8 @@ Description: This is book aims to be a small collection of code used
 License: MIT + file LICENSE
 Imports:
     bookdown,
+    butteR,
+    cleaninginspectoR,
     data.table,
     devtools,
     dplyr,
@@ -35,6 +37,7 @@ Imports:
     ggpubr,
     jsonlite,
     kableExtra,
+    kobostandards,
     lubridate,
     magrittr,
     nngeo,
@@ -45,6 +48,7 @@ Imports:
     readr,
     readxl,
     httr,
+    hypegrammaR,
     reshape,
     scales,
     sdcMicro,
@@ -54,18 +58,20 @@ Imports:
     srvyr,
     stringr,
     survey,
-    table,
+    surveyweights,
     tibble,
     tidyr,
     tidyverse,
     UpSetR,
-    weights
+    weights,
+    xlsformfill
 Remotes:
     impact-initiatives/cleaninginspectoR,
     impact-initiatives/hypegrammaR,
     impact-initiatives/kobostandards,
     impact-initiatives/surveyweights,
-    impact-initiatives/xlsformfill
+    impact-initiatives/xlsformfill,
+    zackarno/butteR
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
