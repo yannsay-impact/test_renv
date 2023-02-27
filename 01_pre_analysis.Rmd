@@ -1,0 +1,135 @@
+# Pre analysis
+
+This section will show you different steps or tools that can be used before the 
+analysis takes place such as checking your KOBO tool or following up your data 
+collection.
+
+## Checking the XLS kobo tools for constraints errors 
+This function checks the relevant column in the questionnaire and flag  issues with constraints of type (selected(question_name,question_answer)). 
+
+```{r include = T, warning = FALSE, results = 'hide', message = FALSE}
+library(stringr)
+library(purrr)
+library(readxl)
+library(qdapRegex)
+library(sf)
+library(tidyr)
+library(magrittr)
+library(dplyr)
+
+questions <- read_xlsx("inputs/UKR2007_MSNA20_HH_Questionnaire_24JUL2020.xlsx",sheet="survey")
+choices <- read_xlsx("inputs/UKR2007_MSNA20_HH_Questionnaire_24JUL2020.xlsx",sheet="choices")
+
+check_answer_in_list <- function(constraint) {
+  
+  if(!str_detect(constraint,",")){
+    return(TRUE)
+  }
+
+  question_regex <- "\\{([^()]+)\\}"
+  answer_regex <- "\\'([^()]+)\\'"
+  
+  question <- gsub(question_regex, "\\1", str_extract_all(constraint, question_regex)[[1]])
+  answer <- gsub(answer_regex, "\\1", str_extract_all(constraint, answer_regex)[[1]])
+  
+  question_type <- questions %>% 
+                     filter(name==question) %>% 
+                     filter(!grepl("^(begin|end)\\s+group$",type)) %>% 
+                     pull(type)
+  
+  listname <- gsub("^.*\\s","",question_type)
+  
+  choices_list <- choices %>% filter(list_name==listname) %>% pull(name)
+  
+  return(answer %in% choices_list)
+  
+}
+
+check_constraints <- function(questions,choices) {
+  
+questions <- mutate_at(questions, c("name", "type"), ~str_trim(.))
+choices <- mutate_at(choices, c("list_name", "name"), ~str_trim(.))
+  
+  all_contraints <- questions %>% filter(grepl("selected",relevant)) %>% pull(relevant)
+  all_contraints <- gsub('"',"'",all_contraints)
+
+  rs_list <- map(all_contraints,~map_lgl(unlist(ex_default(.x, pattern = "selected\\s*\\([^\\)]*\\)")),check_answer_in_list))
+  
+  map2(rs_list,seq_along(rs_list), ~ if(length(which(!.x))!=0) {
+    return(unlist(ex_default(all_contraints[.y], pattern = "selected\\s*\\([^\\)]*\\)"))[which(!.x)])
+  } ) %>% unlist() %>% unique()
+  
+}
+```
+
+Call this function by passing the questionnaire and choices and the output will be the list of wrong constraints of type (selected(question_name,question_answer)) if any. An error means that the answer does not exist in the choices sheet
+
+```{r}
+check_constraints(questions,choices) 
+
+```
+
+## Sampling
+### Simple Random sampling
+### Stratified Random sampling
+### Cluster sampling
+### 2 stages random sampling
+### Sample distribution usin population raster
+### Generation of random sample points
+It is quite common practice to select survey locations before data collection, using randomly distributed points. In this case, the enumerator finds the location of a certain sample point using mobile device navigation tools and conducts an interview near that location. That practice ensures that all survey locations were selected in a random manner.
+<br>
+First, let's join our sampling frame (in this case it was generated with [Probability sampling tool](https://impact-initiatives.shinyapps.io/r_sampling_tool_v2/)) to the settlement polygons and generate a random set of points within each polygon. We will use settlement polygons but it's possible to use rectangle or hexagon fishnet with interview numbers distributed using population raster to obtain sample size that will correspond with settlement population density. 
+```{r}
+ADM4 <- st_read(dsn = "inputs/MSNA20_ADM4.geojson")
+sampling_frame <- read.csv("inputs/sampling_frame20200701-132150.csv")
+
+ADM4_for_sample <- ADM4 %>%
+        right_join(sampling_frame, by = c("adm4Pcd" = "adm4Pcode"))
+
+sample_all_pnt <- st_sample(ADM4_for_sample, rep(ADM4_for_sample$Survey, nrow(ADM4_for_sample)))%>%
+  st_as_sf
+```
+
+Now we would need to transfer attributes from the settlement layer to our random points.
+```{r, message= F, warning=F}
+#first we should generate indexes that will be used for this transfer
+index <- rep(seq_along(ADM4_for_sample$Survey), ADM4_for_sample$Survey)
+
+#now we should add indexes to the settlement layer and then join this layer to the random points
+ADM4_for_sample <- ADM4_for_sample %>%
+                   st_drop_geometry()%>%
+                   as.data.frame(row.names = 1:nrow(.))%>%
+                   tibble::rownames_to_column(var = "index")%>%
+                   mutate_at(1, as.numeric)
+
+sample_all_pnt <- st_coordinates(sample_all_pnt)%>%
+                  as.data.frame()%>%
+                  bind_cols(index)%>%
+                  set_colnames(c("Longitude_pnt","Latitude_pnt","index"))%>%
+                  left_join(ADM4_for_sample, by = "index")
+
+#with the code below we will get the unique id for each point that will have a settlement name and point number
+sample_all_pnt$GPS_id <- paste(sample_all_pnt$adm4NmL, data.table::rowid(sample_all_pnt$adm4NmL), sep = "_")
+
+sample_all_pnt <- st_as_sf(x = sample_all_pnt, 
+                    coords = c("Longitude_pnt", "Latitude_pnt"),
+                    crs = "+proj=longlat +datum=WGS84")
+
+#and now we can visualize our random points for some settlement to check their distribution
+sample_all_pnt %>%
+  filter(adm4NmL == "Bakhmut")%>%
+  select(adm4NmL)%>%
+  plot()
+
+```
+
+The last step will be to export the sample points into any suitable GIS format (GeoJSON, Shapefile, KML, etc.) and transfer that file to the mobile devices of the enumerators.
+```{r}
+#check if there are directory for the outputs and write there output geojson file
+if(!dir.exists("outputs")) {
+  dir.create("outputs")
+}
+
+st_write(sample_all_pnt, "outputs/sample_points.geojson", delete_dsn = TRUE)
+```
+
