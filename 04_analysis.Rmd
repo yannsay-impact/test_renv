@@ -172,7 +172,6 @@ long_table %>% head()
 ```{r, tidy=FALSE, message= F, warning=F, error=F, echo=T}
 ###makes some additions. 
 library(tidyverse)
-library(butteR)
 library(srvyr)
 library(kableExtra)
 df<-read_csv("inputs/UKR2007_MSNA20_HH_dataset_main_rcop.csv")

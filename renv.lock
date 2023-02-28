@@ -408,26 +408,6 @@
         "sass"
       ]
     },
-    "butteR": {
-      "Package": "butteR",
-      "Version": "0.1.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "zackarno",
-      "RemoteRepo": "butteR",
-      "RemoteRef": "master",
-      "RemoteSha": "54cc596b411ddd7528b4e2d74078278dc276c575",
-      "Hash": "17d355d2688eb7fedee7a2d4b0e9b0e4",
-      "Requirements": [
-        "dplyr",
-        "forcats",
-        "leaflet",
-        "sf",
-        "srvyr",
-        "tidyr"
-      ]
-    },
     "cachem": {
       "Package": "cachem",
       "Version": "1.0.5",
@@ -3172,10 +3152,10 @@
     },
     "units": {
       "Package": "units",
-      "Version": "0.8-0",
+      "Version": "0.8-1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6c374b265ba437f8d384ec7a313edd96",
+      "Hash": "81433967f9b34a120a4f5a5a016cd5ed",
       "Requirements": [
         "Rcpp"
       ]
