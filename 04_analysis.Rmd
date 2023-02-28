@@ -129,6 +129,8 @@ dfsvy %>%
 
 At first let's select all numerical variables from the dataset using Kobo questionnaire and dataset. It can be done with the following custom function:
 ```{r}
+library(spatstat)
+
 select_numerical <- function(dataset, kobo){
   kobo_questions <- kobo[grepl("integer|decimal|calculate", kobo$type),c("type","name")]
   names.use <- names(dataset)[(names(dataset) %in% as.character(kobo_questions$name))]
@@ -591,6 +593,8 @@ As the p-value is more than the significance level 0.05, we can't conclude that 
 #### Bonus : Visualization of the data to confirm the findinds 
 
 ```{r, warning=F}
+library(ggpubr)
+
 ggline(main_dataset, x = "hoh_gender", y = "b15_hohh_income", 
        add = c("mean_se", "jitter"), 
        order = c("Female", "Male"),
