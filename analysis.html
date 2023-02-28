@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Analysis | R cookbook for analysis with IMPACT</title>
+  <meta name="description" content="7 Analysis | R cookbook for analysis with IMPACT" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Analysis | R cookbook for analysis with IMPACT" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Analysis | R cookbook for analysis with IMPACT" />
+  
+  
+  
+
+<meta name="author" content="R CoP" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="composite-indicators.html"/>
+<link rel="next" href="outputs.html"/>
+<script src="libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html#hello" id="toc-hello"><span class="toc-section-number">1</span> Hello</a></li>
+<li><a href="meta-information.html#meta-information" id="toc-meta-information"><span class="toc-section-number">2</span> Meta information</a>
+<ul>
+<li><a href="meta-information.html#creating-the-questionnaire-object" id="toc-creating-the-questionnaire-object"><span class="toc-section-number">2.1</span> Creating the questionnaire object</a></li>
+</ul></li>
+<li><a href="downloading-data-from-kobo-server.html#downloading-data-from-kobo-server" id="toc-downloading-data-from-kobo-server"><span class="toc-section-number">3</span> Downloading data from kobo server</a>
+<ul>
+<li><a href="downloading-data-from-kobo-server.html#defining-the-needed-functions" id="toc-defining-the-needed-functions"><span class="toc-section-number">3.1</span> Defining the needed functions</a></li>
+<li><a href="downloading-data-from-kobo-server.html#creating-data-url-and-credentials-variables" id="toc-creating-data-url-and-credentials-variables"><span class="toc-section-number">3.2</span> Creating data url and credentials variables</a></li>
+<li><a href="downloading-data-from-kobo-server.html#fetching-the-data-from-the-server" id="toc-fetching-the-data-from-the-server"><span class="toc-section-number">3.3</span> Fetching the data from the server</a></li>
+</ul></li>
+<li><a href="pre-analysis.html#pre-analysis" id="toc-pre-analysis"><span class="toc-section-number">4</span> Pre analysis</a>
+<ul>
+<li><a href="pre-analysis.html#checking-the-xls-kobo-tools-for-constraints-errors" id="toc-checking-the-xls-kobo-tools-for-constraints-errors"><span class="toc-section-number">4.1</span> Checking the XLS kobo tools for constraints errors</a></li>
+<li><a href="pre-analysis.html#sampling" id="toc-sampling"><span class="toc-section-number">4.2</span> Sampling</a>
+<ul>
+<li><a href="pre-analysis.html#simple-random-sampling" id="toc-simple-random-sampling"><span class="toc-section-number">4.2.1</span> Simple Random sampling</a></li>
+<li><a href="pre-analysis.html#stratified-random-sampling" id="toc-stratified-random-sampling"><span class="toc-section-number">4.2.2</span> Stratified Random sampling</a></li>
+<li><a href="pre-analysis.html#cluster-sampling" id="toc-cluster-sampling"><span class="toc-section-number">4.2.3</span> Cluster sampling</a></li>
+<li><a href="pre-analysis.html#stages-random-sampling" id="toc-stages-random-sampling"><span class="toc-section-number">4.2.4</span> 2 stages random sampling</a></li>
+<li><a href="pre-analysis.html#sample-distribution-usin-population-raster" id="toc-sample-distribution-usin-population-raster"><span class="toc-section-number">4.2.5</span> Sample distribution usin population raster</a></li>
+</ul></li>
+</ul></li>
+<li><a href="data-collection-and-processing.html#data-collection-and-processing" id="toc-data-collection-and-processing"><span class="toc-section-number">5</span> Data Collection and Processing</a>
+<ul>
+<li><a href="data-collection-and-processing.html#testing-the-tool" id="toc-testing-the-tool"><span class="toc-section-number">5.1</span> Testing the tool</a>
+<ul>
+<li><a href="data-collection-and-processing.html#creating-dummy-data" id="toc-creating-dummy-data"><span class="toc-section-number">5.1.1</span> Creating dummy data</a></li>
+</ul></li>
+<li><a href="data-collection-and-processing.html#download-data" id="toc-download-data"><span class="toc-section-number">5.2</span> Download data</a>
+<ul>
+<li><a href="data-collection-and-processing.html#downloading-audit-files-using-audit_url" id="toc-downloading-audit-files-using-audit_url"><span class="toc-section-number">5.2.1</span> Downloading Audit files using audit_URL</a></li>
+<li><a href="data-collection-and-processing.html#download-audit-files-using-form-name" id="toc-download-audit-files-using-form-name"><span class="toc-section-number">5.2.2</span> Download audit files using form name</a></li>
+</ul></li>
+<li><a href="data-collection-and-processing.html#data-collection-follow-up" id="toc-data-collection-follow-up"><span class="toc-section-number">5.3</span> Data collection follow-up</a>
+<ul>
+<li><a href="data-collection-and-processing.html#checking-surveys-against-the-sampling-frame" id="toc-checking-surveys-against-the-sampling-frame"><span class="toc-section-number">5.3.1</span> checking surveys against the sampling frame</a></li>
+</ul></li>
+<li><a href="data-collection-and-processing.html#data-falsification" id="toc-data-falsification"><span class="toc-section-number">5.4</span> Data falsification</a>
+<ul>
+<li><a href="data-collection-and-processing.html#check-for-time-in-the-dataset" id="toc-check-for-time-in-the-dataset"><span class="toc-section-number">5.4.1</span> Check for time (in the dataset)</a></li>
+<li><a href="data-collection-and-processing.html#check-for-time-audit-files" id="toc-check-for-time-audit-files"><span class="toc-section-number">5.4.2</span> Check for time (audit files)</a></li>
+<li><a href="data-collection-and-processing.html#check-for-time---calculating-the-elapsed-time-between-each-interview" id="toc-check-for-time---calculating-the-elapsed-time-between-each-interview"><span class="toc-section-number">5.4.3</span> Check for time - calculating the elapsed time between each interview</a></li>
+<li><a href="data-collection-and-processing.html#silouhette-analysis" id="toc-silouhette-analysis"><span class="toc-section-number">5.4.4</span> Silouhette analysis</a></li>
+<li><a href="data-collection-and-processing.html#check-for-duplicates" id="toc-check-for-duplicates"><span class="toc-section-number">5.4.5</span> Check for duplicates</a></li>
+</ul></li>
+<li><a href="data-collection-and-processing.html#data-checks" id="toc-data-checks"><span class="toc-section-number">5.5</span> Data checks</a>
+<ul>
+<li><a href="data-collection-and-processing.html#check-for-outliers" id="toc-check-for-outliers"><span class="toc-section-number">5.5.1</span> Check for outliers</a></li>
+<li><a href="data-collection-and-processing.html#check-others" id="toc-check-others"><span class="toc-section-number">5.5.2</span> Check others</a></li>
+<li><a href="data-collection-and-processing.html#issue-log-function" id="toc-issue-log-function"><span class="toc-section-number">5.5.3</span> Issue log Function</a></li>
+<li><a href="data-collection-and-processing.html#check-for-logical-check" id="toc-check-for-logical-check"><span class="toc-section-number">5.5.4</span> Check for logical check</a></li>
+</ul></li>
+<li><a href="data-collection-and-processing.html#cleaninginspector---inspect_all" id="toc-cleaninginspector---inspect_all"><span class="toc-section-number">5.6</span> cleaninginspectoR - inspect_all</a></li>
+<li><a href="data-collection-and-processing.html#data-cleaning" id="toc-data-cleaning"><span class="toc-section-number">5.7</span> Data cleaning</a>
+<ul>
+<li><a href="data-collection-and-processing.html#re-generate-text-column-for-select-multiple-questions" id="toc-re-generate-text-column-for-select-multiple-questions"><span class="toc-section-number">5.7.1</span> Re-generate text column for select multiple questions</a></li>
+<li><a href="data-collection-and-processing.html#clean-data-base-on-cleaning-log" id="toc-clean-data-base-on-cleaning-log"><span class="toc-section-number">5.7.2</span> Clean data base on cleaning log</a></li>
+<li><a href="data-collection-and-processing.html#check-cleaning-log-raw-dataset-and-clean-dataset" id="toc-check-cleaning-log-raw-dataset-and-clean-dataset"><span class="toc-section-number">5.7.3</span> Check cleaning log, raw dataset and clean dataset</a></li>
+</ul></li>
+<li><a href="data-collection-and-processing.html#data-cleaning---miscellaneous" id="toc-data-cleaning---miscellaneous"><span class="toc-section-number">5.8</span> Data cleaning - miscellaneous</a>
+<ul>
+<li><a href="data-collection-and-processing.html#check-for-data-sanity-check-if-the-data-follow-odk-format-select_one-select_multiple-xxx-choices" id="toc-check-for-data-sanity-check-if-the-data-follow-odk-format-select_one-select_multiple-xxx-choices"><span class="toc-section-number">5.8.1</span> Check for data sanity check if the data follow ODK format (select_one, select_multiple, xxx, choices)</a></li>
+<li><a href="data-collection-and-processing.html#turns-label-to-xml" id="toc-turns-label-to-xml"><span class="toc-section-number">5.8.2</span> Turns label to xml</a></li>
+<li><a href="data-collection-and-processing.html#statistical-disclosure-control-methods" id="toc-statistical-disclosure-control-methods"><span class="toc-section-number">5.8.3</span> Statistical Disclosure Control Methods</a></li>
+</ul></li>
+</ul></li>
+<li><a href="composite-indicators.html#composite-indicators" id="toc-composite-indicators"><span class="toc-section-number">6</span> Composite indicators</a>
+<ul>
+<li><a href="composite-indicators.html#composite-with-1-categorical-variable---select-one" id="toc-composite-with-1-categorical-variable---select-one"><span class="toc-section-number">6.1</span> Composite with 1 categorical variable - select one</a></li>
+<li><a href="composite-indicators.html#composite-with-2-categorical-variables" id="toc-composite-with-2-categorical-variables"><span class="toc-section-number">6.2</span> Composite with 2 categorical variables</a></li>
+<li><a href="composite-indicators.html#composite-with-1-categorical-variable---select-multiple" id="toc-composite-with-1-categorical-variable---select-multiple"><span class="toc-section-number">6.3</span> Composite with 1 categorical variable - select multiple</a></li>
+<li><a href="composite-indicators.html#composite-with-1-numerical-variable" id="toc-composite-with-1-numerical-variable"><span class="toc-section-number">6.4</span> Composite with 1 numerical variable</a></li>
+<li><a href="composite-indicators.html#composite-with-2-numerical-variables" id="toc-composite-with-2-numerical-variables"><span class="toc-section-number">6.5</span> Composite with 2 numerical variables</a></li>
+<li><a href="composite-indicators.html#composite-with-2-or-more-numerical-variables" id="toc-composite-with-2-or-more-numerical-variables"><span class="toc-section-number">6.6</span> Composite with 2 or more numerical variables</a></li>
+<li><a href="composite-indicators.html#new-indicators-from-a-loop-to-main-dataset" id="toc-new-indicators-from-a-loop-to-main-dataset"><span class="toc-section-number">6.7</span> New indicators from a loop to main dataset</a></li>
+</ul></li>
+<li><a href="analysis.html#analysis" id="toc-analysis"><span class="toc-section-number">7</span> Analysis</a>
+<ul>
+<li><a href="analysis.html#srvyr-package" id="toc-srvyr-package"><span class="toc-section-number">7.1</span> srvyr package</a>
+<ul>
+<li><a href="analysis.html#categorical-variables" id="toc-categorical-variables"><span class="toc-section-number">7.1.1</span> Categorical variables</a></li>
+<li><a href="analysis.html#numeric-variables" id="toc-numeric-variables"><span class="toc-section-number">7.1.2</span> Numeric variables</a></li>
+<li><a href="analysis.html#select_one" id="toc-select_one"><span class="toc-section-number">7.1.3</span> select_one</a></li>
+<li><a href="analysis.html#select_mutiple" id="toc-select_mutiple"><span class="toc-section-number">7.1.4</span> select_mutiple</a></li>
+</ul></li>
+<li><a href="analysis.html#analysis-with-numerical-variables" id="toc-analysis-with-numerical-variables"><span class="toc-section-number">7.2</span> Analysis with numerical variables</a>
+<ul>
+<li><a href="analysis.html#averages" id="toc-averages"><span class="toc-section-number">7.2.1</span> Averages</a></li>
+<li><a href="analysis.html#median" id="toc-median"><span class="toc-section-number">7.2.2</span> Median</a></li>
+</ul></li>
+<li><a href="analysis.html#ratios" id="toc-ratios"><span class="toc-section-number">7.3</span> Ratios</a>
+<ul>
+<li><a href="analysis.html#example1" id="toc-example1"><span class="toc-section-number">7.3.1</span> Example1:<br />
+</a></li>
+<li><a href="analysis.html#example2---analyzing-multiple-questions-and-combine-the-output" id="toc-example2---analyzing-multiple-questions-and-combine-the-output"><span class="toc-section-number">7.3.2</span> Example2 - Analyzing multiple questions and combine the output:<br />
+</a></li>
+<li><a href="analysis.html#example3---no-dissagregation-is-needed-andor-the-data-is-not-weighted" id="toc-example3---no-dissagregation-is-needed-andor-the-data-is-not-weighted"><span class="toc-section-number">7.3.3</span> Example3 - No dissagregation is needed and/or the data is not weighted:<br />
+</a></li>
+</ul></li>
+<li><a href="analysis.html#weights" id="toc-weights"><span class="toc-section-number">7.4</span> Weights</a>
+<ul>
+<li><a href="analysis.html#tidyverse" id="toc-tidyverse"><span class="toc-section-number">7.4.1</span> tidyverse</a></li>
+<li><a href="analysis.html#surveyweights" id="toc-surveyweights"><span class="toc-section-number">7.4.2</span> surveyweights</a></li>
+</ul></li>
+<li><a href="analysis.html#repeating-the-above" id="toc-repeating-the-above"><span class="toc-section-number">7.5</span> Repeating the above</a></li>
+<li><a href="analysis.html#analysis---top-x-ranking-select-one-and-select-multiple" id="toc-analysis---top-x-ranking-select-one-and-select-multiple"><span class="toc-section-number">7.6</span> Analysis - top X / ranking (select one and select multiple)</a></li>
+<li><a href="analysis.html#borda-count" id="toc-borda-count"><span class="toc-section-number">7.7</span> Borda count</a></li>
+<li><a href="analysis.html#hypothesis-testing" id="toc-hypothesis-testing"><span class="toc-section-number">7.8</span> Hypothesis testing</a>
+<ul>
+<li><a href="analysis.html#t-test" id="toc-t-test"><span class="toc-section-number">7.8.1</span> T-test</a></li>
+<li><a href="analysis.html#anova" id="toc-anova"><span class="toc-section-number">7.8.2</span> ANOVA</a></li>
+<li><a href="analysis.html#chi-squares" id="toc-chi-squares"><span class="toc-section-number">7.8.3</span> chi-squares</a></li>
+<li><a href="analysis.html#chi-squared-goodness-of-fit-test" id="toc-chi-squared-goodness-of-fit-test"><span class="toc-section-number">7.8.4</span> Chi-squared Goodness of Fit test</a></li>
+</ul></li>
+</ul></li>
+<li><a href="outputs.html#outputs" id="toc-outputs"><span class="toc-section-number">8</span> Outputs</a>
+<ul>
+<li><a href="outputs.html#from-long-to-large-table" id="toc-from-long-to-large-table"><span class="toc-section-number">8.1</span> From long to large table</a></li>
+<li><a href="outputs.html#merge-file" id="toc-merge-file"><span class="toc-section-number">8.2</span> Merge file</a></li>
+<li><a href="outputs.html#graphs" id="toc-graphs"><span class="toc-section-number">8.3</span> Graphs</a>
+<ul>
+<li><a href="outputs.html#spider-graphs" id="toc-spider-graphs"><span class="toc-section-number">8.3.1</span> spider graphs</a></li>
+<li><a href="outputs.html#prison-graphs" id="toc-prison-graphs"><span class="toc-section-number">8.3.2</span> prison graphs</a></li>
+<li><a href="outputs.html#bar-graphs" id="toc-bar-graphs"><span class="toc-section-number">8.3.3</span> Bar graphs</a></li>
+<li><a href="outputs.html#euler-diagram" id="toc-euler-diagram"><span class="toc-section-number">8.3.4</span> Euler diagram</a></li>
+<li><a href="outputs.html#venn-diagram" id="toc-venn-diagram"><span class="toc-section-number">8.3.5</span> Venn diagram</a></li>
+<li><a href="outputs.html#upset-plots" id="toc-upset-plots"><span class="toc-section-number">8.3.6</span> UpSet plots</a></li>
+<li><a href="outputs.html#boxplots" id="toc-boxplots"><span class="toc-section-number">8.3.7</span> boxplots</a></li>
+</ul></li>
+<li><a href="outputs.html#labels" id="toc-labels"><span class="toc-section-number">8.4</span> Labels</a>
+<ul>
+<li><a href="outputs.html#xml-to-label" id="toc-xml-to-label"><span class="toc-section-number">8.4.1</span> Xml to Label</a></li>
+<li><a href="outputs.html#change-from-label-to-xml" id="toc-change-from-label-to-xml"><span class="toc-section-number">8.4.2</span> change from label to xml</a></li>
+</ul></li>
+<li><a href="outputs.html#dashboarding---sharing-information" id="toc-dashboarding---sharing-information"><span class="toc-section-number">8.5</span> Dashboarding - Sharing information</a></li>
+<li><a href="outputs.html#outputs-with-hypothesis-testing-results" id="toc-outputs-with-hypothesis-testing-results"><span class="toc-section-number">8.6</span> Outputs with hypothesis testing results</a></li>
+</ul></li>
+<li><a href="miscellaneous.html#miscellaneous" id="toc-miscellaneous"><span class="toc-section-number">9</span> Miscellaneous</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R cookbook for analysis with IMPACT</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analysis" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Analysis<a href="analysis.html#analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="srvyr-package" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> srvyr package<a href="analysis.html#srvyr-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>“The srvyr package aims to add dplyr like syntax to the survey package.” It is a very useful package for a variety of aggregations of survey data.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="analysis.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="do">###makes some additions. </span></span>
+<span id="cb100-2"><a href="analysis.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb100-3"><a href="analysis.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb100-4"><a href="analysis.html#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb100-5"><a href="analysis.html#cb100-5" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;inputs/UKR2007_MSNA20_HH_dataset_main_rcop.csv&quot;</span>)</span>
+<span id="cb100-6"><a href="analysis.html#cb100-6" aria-hidden="true" tabindex="-1"></a>dfsvy<span class="ot">&lt;-</span><span class="fu">as_survey</span>(df)</span></code></pre></div>
+<div id="categorical-variables" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Categorical variables<a href="analysis.html#categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>srvyr package allows categorical variables to be broken down using a similar syntax as dplyr. Using dplyr you might typically calculate a percent mean as follows:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="analysis.html#cb101-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb101-2"><a href="analysis.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(b9_hohh_marital_status) <span class="sc">%&gt;%</span> </span>
+<span id="cb101-3"><a href="analysis.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb101-4"><a href="analysis.html#cb101-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n=</span><span class="fu">n</span>()</span>
+<span id="cb101-5"><a href="analysis.html#cb101-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb101-6"><a href="analysis.html#cb101-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb101-7"><a href="analysis.html#cb101-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb101-8"><a href="analysis.html#cb101-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_mean=</span>n<span class="sc">/</span><span class="fu">sum</span>(n)</span>
+<span id="cb101-9"><a href="analysis.html#cb101-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   b9_hohh_marital_status                        n pct_mean
+##   &lt;chr&gt;                                     &lt;int&gt;    &lt;dbl&gt;
+## 1 divorced                                    183   0.113 
+## 2 married                                     677   0.419 
+## 3 separated_married_but_not_living_together    37   0.0229
+## 4 single                                      129   0.0798
+## 5 unmarried_but_living_together                96   0.0594
+## 6 widowed                                     495   0.306</code></pre>
+<p>To calculate the percent mean of a categorical variable using srvyr object is required. The syntax is quite similar to dplyr, but a bit less verbose. By specifying the vartype as “ci” we also get the upper and lower confidence intervals</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="analysis.html#cb103-1" aria-hidden="true" tabindex="-1"></a>dfsvy <span class="sc">%&gt;%</span> </span>
+<span id="cb103-2"><a href="analysis.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(b9_hohh_marital_status) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-3"><a href="analysis.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb103-4"><a href="analysis.html#cb103-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_mean =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb103-5"><a href="analysis.html#cb103-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   b9_hohh_marital_status                    pct_mean pct_mean_low pct_mean_upp
+##   &lt;chr&gt;                                        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1 divorced                                    0.113        0.0977       0.129 
+## 2 married                                     0.419        0.395        0.443 
+## 3 separated_married_but_not_living_together   0.0229       0.0156       0.0302
+## 4 single                                      0.0798       0.0666       0.0930
+## 5 unmarried_but_living_together               0.0594       0.0478       0.0709
+## 6 widowed                                     0.306        0.284        0.329</code></pre>
+<p>To calculate the weigthed percent mean of a multiple response option you need to created a srvyr object including the weights. The syntax is similar to dyplr and allows for the total columns</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="analysis.html#cb105-1" aria-hidden="true" tabindex="-1"></a>weighted_object <span class="ot">&lt;-</span> main_dataset <span class="sc">%&gt;%</span> <span class="fu">as_survey_design</span>(<span class="at">ids =</span> X_uuid, <span class="at">weights =</span> stratum.weight)</span>
+<span id="cb105-2"><a href="analysis.html#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="analysis.html#cb105-3" aria-hidden="true" tabindex="-1"></a>weighted_table <span class="ot">&lt;-</span> weighted_object <span class="sc">%&gt;%</span> </span>
+<span id="cb105-4"><a href="analysis.html#cb105-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_by</span>(adm1NameLat) <span class="sc">%&gt;%</span> <span class="co">#group by categorical variable</span></span>
+<span id="cb105-5"><a href="analysis.html#cb105-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(<span class="fu">starts_with</span>(<span class="st">&quot;b10_hohh_vulnerability.&quot;</span>)), survey_mean) <span class="sc">%&gt;%</span> <span class="co">#select multiple response question</span></span>
+<span id="cb105-6"><a href="analysis.html#cb105-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb105-7"><a href="analysis.html#cb105-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">bind_rows</span>(</span>
+<span id="cb105-8"><a href="analysis.html#cb105-8" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">summarise_at</span>(weighted_object,</span>
+<span id="cb105-9"><a href="analysis.html#cb105-9" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">vars</span>(<span class="fu">starts_with</span>(<span class="st">&quot;b10_hohh_vulnerability.&quot;</span>)), survey_mean) <span class="co"># bind the total</span></span>
+<span id="cb105-10"><a href="analysis.html#cb105-10" aria-hidden="true" tabindex="-1"></a>                  ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-11"><a href="analysis.html#cb105-11" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate_at</span>(<span class="fu">vars</span>(adm1NameLat), <span class="sc">~</span><span class="fu">replace</span>(., <span class="fu">is.na</span>(.), <span class="st">&quot;Total&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-12"><a href="analysis.html#cb105-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(., <span class="sc">-</span>(<span class="fu">ends_with</span>(<span class="st">&quot;_se&quot;</span>))) <span class="sc">%&gt;%</span>  <span class="co">#remove the colums with the variance type calculations</span></span>
+<span id="cb105-13"><a href="analysis.html#cb105-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate_if</span>(is.numeric, <span class="sc">~</span> . <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-14"><a href="analysis.html#cb105-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>)</span>
+<span id="cb105-15"><a href="analysis.html#cb105-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-16"><a href="analysis.html#cb105-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-17"><a href="analysis.html#cb105-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(weighted_table)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 11
+##   adm1NameLat b10_hohh_vulnerability.no b10_hohh_vulnerability… b10_hohh_vulner…
+##   &lt;chr&gt;                           &lt;dbl&gt;                   &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Donetska                         30.0                    9.7              8.88
+## 2 Luhanska                         15.2                    9.88             9.63
+## 3 Total                            26.4                    9.74             9.07
+## # … with 7 more variables: b10_hohh_vulnerability.veteran_of_war_ato &lt;dbl&gt;,
+## #   b10_hohh_vulnerability.single_parent &lt;dbl&gt;,
+## #   b10_hohh_vulnerability.family_with_3_or_more_children &lt;dbl&gt;,
+## #   b10_hohh_vulnerability.family_with_foster_children &lt;dbl&gt;,
+## #   b10_hohh_vulnerability.other_specify &lt;dbl&gt;,
+## #   b10_hohh_vulnerability.chronic_illness &lt;dbl&gt;,
+## #   b10_hohh_vulnerability.older_person &lt;dbl&gt;</code></pre>
+</div>
+<div id="numeric-variables" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Numeric variables<a href="analysis.html#numeric-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>srvyr treats the calculation/aggregation of numeric variables differently in an attempt to mirror dplyr syntax</p>
+<p>to calculate the mean and median expenditure in dplyr you would likely do the following</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="analysis.html#cb107-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb107-2"><a href="analysis.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb107-3"><a href="analysis.html#cb107-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_expenditure=</span> <span class="fu">mean</span>(n1_HH_total_expenditure,<span class="at">na.rm=</span>T),</span>
+<span id="cb107-4"><a href="analysis.html#cb107-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_expenditure=</span><span class="fu">median</span>(n1_HH_total_expenditure,<span class="at">na.rm=</span>T),</span>
+<span id="cb107-5"><a href="analysis.html#cb107-5" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   mean_expenditure median_expenditure
+##              &lt;dbl&gt;              &lt;dbl&gt;
+## 1            5129.               4000</code></pre>
+<p>If you wanted to subset this by another variable in dplyr you would add the group_by argument</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="analysis.html#cb109-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb109-2"><a href="analysis.html#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
+<span id="cb109-3"><a href="analysis.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb109-4"><a href="analysis.html#cb109-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_expenditure=</span> <span class="fu">mean</span>(n1_HH_total_expenditure,<span class="at">na.rm=</span>T),</span>
+<span id="cb109-5"><a href="analysis.html#cb109-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_expenditure=</span><span class="fu">median</span>(n1_HH_total_expenditure,<span class="at">na.rm=</span>T),</span>
+<span id="cb109-6"><a href="analysis.html#cb109-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   strata     mean_expenditure median_expenditure
+##   &lt;chr&gt;                 &lt;dbl&gt;              &lt;dbl&gt;
+## 1 20km_rural            5488.               4000
+## 2 20km_urban            6208.               5000
+## 3 5km_rural             3919.               3075
+## 4 5km_urban             4942.               4000</code></pre>
+<p>This is the reason why the syntax also varies between categorical and numeric variables in srvyr. Therefore, to do the same using srvyr you would do the following (with a survey object). Note that due to this difference in syntax the na.rm argument works for numeric variables, but <strong>does not work</strong> for categorical variables. This was modified when srvyr was updated from v 0.3.8</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="analysis.html#cb111-1" aria-hidden="true" tabindex="-1"></a>dfsvy <span class="sc">%&gt;%</span> </span>
+<span id="cb111-2"><a href="analysis.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb111-3"><a href="analysis.html#cb111-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">mean=</span> <span class="fu">survey_mean</span>(n1_HH_total_expenditure,<span class="at">na.rm=</span>T,<span class="at">vartype =</span> <span class="st">&quot;ci&quot;</span>),</span>
+<span id="cb111-4"><a href="analysis.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##    mean mean_low mean_upp
+##   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 5129.    4891.    5367.</code></pre>
+<p>similar to dplyr you can easily add a group_by argument to add a subset calculation</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="analysis.html#cb113-1" aria-hidden="true" tabindex="-1"></a>dfsvy <span class="sc">%&gt;%</span> </span>
+<span id="cb113-2"><a href="analysis.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
+<span id="cb113-3"><a href="analysis.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb113-4"><a href="analysis.html#cb113-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">mean=</span> <span class="fu">survey_mean</span>(n1_HH_total_expenditure,<span class="at">na.rm=</span>T,<span class="at">vartype =</span> <span class="st">&quot;ci&quot;</span>),</span>
+<span id="cb113-5"><a href="analysis.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 4
+##   strata      mean mean_low mean_upp
+##   &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 20km_rural 5488.    4980.    5996.
+## 2 20km_urban 6208.    5661.    6756.
+## 3 5km_rural  3919.    3469.    4370.
+## 4 5km_urban  4942.    4604.    5280.</code></pre>
+</div>
+<div id="select_one" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> select_one<a href="analysis.html#select_one" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="select_mutiple" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> select_mutiple<a href="analysis.html#select_mutiple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="analysis-with-numerical-variables" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Analysis with numerical variables<a href="analysis.html#analysis-with-numerical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="averages" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Averages<a href="analysis.html#averages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>###Summarytools (CRAN package)</p>
+<p>###hypegrammaR / koboquest / butteR</p>
+</div>
+<div id="median" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Median<a href="analysis.html#median" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>####Spatstat
+<a href="https://cran.r-project.org/web/packages/spatstat/index.html">Spatstat</a> - library with set of different functions for analyzing Spatial Point Patterns but also quite useful for analysis of weighted data.</p>
+<p>At first let’s select all numerical variables from the dataset using Kobo questionnaire and dataset. It can be done with the following custom function:</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="analysis.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span></code></pre></div>
+<pre><code>## Loading required package: spatstat.data</code></pre>
+<pre><code>## Loading required package: spatstat.geom</code></pre>
+<pre><code>## spatstat.geom 3.0-3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;spatstat.geom&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:maditr&#39;:
+## 
+##     shift</code></pre>
+<pre><code>## The following object is masked from &#39;package:grid&#39;:
+## 
+##     as.mask</code></pre>
+<pre><code>## Loading required package: spatstat.random</code></pre>
+<pre><code>## spatstat.random 3.0-1</code></pre>
+<pre><code>## Loading required package: spatstat.explore</code></pre>
+<pre><code>## Loading required package: nlme</code></pre>
+<pre><code>## 
+## Attaching package: &#39;nlme&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     collapse</code></pre>
+<pre><code>## spatstat.explore 3.0-5</code></pre>
+<pre><code>## Loading required package: spatstat.model</code></pre>
+<pre><code>## Loading required package: rpart</code></pre>
+<pre><code>## spatstat.model 3.0-2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;spatstat.model&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:expss&#39;:
+## 
+##     valid</code></pre>
+<pre><code>## Loading required package: spatstat.linnet</code></pre>
+<pre><code>## spatstat.linnet 3.0-3</code></pre>
+<pre><code>## 
+## spatstat 3.0-2 
+## For an introduction to spatstat, type &#39;beginner&#39;</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="analysis.html#cb137-1" aria-hidden="true" tabindex="-1"></a>select_numerical <span class="ot">&lt;-</span> <span class="cf">function</span>(dataset, kobo){</span>
+<span id="cb137-2"><a href="analysis.html#cb137-2" aria-hidden="true" tabindex="-1"></a>  kobo_questions <span class="ot">&lt;-</span> kobo[<span class="fu">grepl</span>(<span class="st">&quot;integer|decimal|calculate&quot;</span>, kobo<span class="sc">$</span>type),<span class="fu">c</span>(<span class="st">&quot;type&quot;</span>,<span class="st">&quot;name&quot;</span>)]</span>
+<span id="cb137-3"><a href="analysis.html#cb137-3" aria-hidden="true" tabindex="-1"></a>  names.use <span class="ot">&lt;-</span> <span class="fu">names</span>(dataset)[(<span class="fu">names</span>(dataset) <span class="sc">%in%</span> <span class="fu">as.character</span>(kobo_questions<span class="sc">$</span>name))]</span>
+<span id="cb137-4"><a href="analysis.html#cb137-4" aria-hidden="true" tabindex="-1"></a>  numerical <span class="ot">&lt;-</span> dataset[,<span class="fu">c</span>(names.use,<span class="st">&quot;X_uuid&quot;</span>,<span class="st">&#39;strata&#39;</span>,<span class="st">&#39;stratum.weight&#39;</span>)] <span class="co">#Here we can select any other relevant variables</span></span>
+<span id="cb137-5"><a href="analysis.html#cb137-5" aria-hidden="true" tabindex="-1"></a>  numerical[names.use] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(numerical[names.use], gsub, <span class="at">pattern =</span> <span class="st">&#39;NA&#39;</span>, <span class="at">replacement =</span> <span class="cn">NA</span>)</span>
+<span id="cb137-6"><a href="analysis.html#cb137-6" aria-hidden="true" tabindex="-1"></a>  numerical[names.use] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(numerical[names.use], as.numeric)</span>
+<span id="cb137-7"><a href="analysis.html#cb137-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerical)</span>
+<span id="cb137-8"><a href="analysis.html#cb137-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb137-9"><a href="analysis.html#cb137-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-10"><a href="analysis.html#cb137-10" aria-hidden="true" tabindex="-1"></a>numerical_questions <span class="ot">&lt;-</span> <span class="fu">select_numerical</span>(main_dataset, questions)</span>
+<span id="cb137-11"><a href="analysis.html#cb137-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-12"><a href="analysis.html#cb137-12" aria-hidden="true" tabindex="-1"></a>numerical_classes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(numerical_questions[,<span class="dv">1</span><span class="sc">:</span><span class="fu">c</span>(<span class="fu">ncol</span>(numerical_questions)<span class="sc">-</span><span class="dv">3</span>)], class) <span class="co">#Here we can check class of each selected variable</span></span>
+<span id="cb137-13"><a href="analysis.html#cb137-13" aria-hidden="true" tabindex="-1"></a>numerical_classes <span class="ot">&lt;-</span> numerical_classes[<span class="st">&quot;character&quot;</span> <span class="sc">%in%</span> numerical_classes] <span class="co">#and here we check if any variable has class &quot;character&quot;</span></span>
+<span id="cb137-14"><a href="analysis.html#cb137-14" aria-hidden="true" tabindex="-1"></a>numerical_questions <span class="ot">&lt;-</span> numerical_questions[ , <span class="sc">!</span><span class="fu">names</span>(numerical_questions) <span class="sc">%in%</span> numerical_classes] <span class="co">#if any variable has a character class then we remove it</span></span>
+<span id="cb137-15"><a href="analysis.html#cb137-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(numerical_classes)<span class="co">#and here we removing vector with classes from our environment</span></span></code></pre></div>
+<p>Now let’s calculate weighted median for “n1_HH_total_expenditure”.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="analysis.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted.median</span>(numerical_questions<span class="sc">$</span>n1_HH_total_expenditure, numerical_questions<span class="sc">$</span>stratum.weight, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 4150</code></pre>
+<p>But if we want to calculate weighted medians for each variable we will need to iterate this function on those variables. But first we will need to exclude variables with less than 3 observations.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="analysis.html#cb140-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> numerical_questions <span class="sc">%&gt;%</span></span>
+<span id="cb140-2"><a href="analysis.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="sc">-</span>X_uuid, <span class="sc">-</span>strata) <span class="sc">%&gt;%</span></span>
+<span id="cb140-3"><a href="analysis.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">everything</span>(), <span class="at">.fns=</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.)) ))<span class="sc">%&gt;%</span></span>
+<span id="cb140-4"><a href="analysis.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>()<span class="co">#Calculating count of observation for each variable</span></span>
+<span id="cb140-5"><a href="analysis.html#cb140-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-6"><a href="analysis.html#cb140-6" aria-hidden="true" tabindex="-1"></a>numerical_questions <span class="ot">&lt;-</span> numerical_questions[ , (<span class="fu">names</span>(numerical_questions) <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">subset</span>(counts, counts[,<span class="dv">1</span>] <span class="sc">&gt;</span> <span class="dv">3</span>)))]</span>
+<span id="cb140-7"><a href="analysis.html#cb140-7" aria-hidden="true" tabindex="-1"></a><span class="co">#removing variables with less than 3 observations</span></span>
+<span id="cb140-8"><a href="analysis.html#cb140-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-9"><a href="analysis.html#cb140-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-10"><a href="analysis.html#cb140-10" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">lapply</span>(numerical_questions[<span class="dv">1</span><span class="sc">:</span><span class="dv">46</span>], weighted.median, <span class="at">w =</span> numerical_questions<span class="sc">$</span>stratum.weight, <span class="at">na.rm=</span><span class="cn">TRUE</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb140-11"><a href="analysis.html#cb140-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div>
+<p>Now we can transpond resulting vector and add description to the calculation</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="analysis.html#cb141-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(medians),<span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb141-2"><a href="analysis.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(medians)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Median_wght&quot;</span></span>
+<span id="cb141-3"><a href="analysis.html#cb141-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(medians)</span></code></pre></div>
+<pre><code>##                               Median_wght
+## b15_hohh_income                    2780.0
+## hohh_age_18                           0.0
+## age_18                                0.0
+## b21_num_additional_hh_members         0.5
+## age_5_18_number                       0.0
+## age_5_12_number                       0.0</code></pre>
+</div>
+</div>
+<div id="ratios" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Ratios<a href="analysis.html#ratios" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This function computes the % of answers for select multiple questions.<br />
+The output can be used as a data merge file for indesign.<br />
+The arguments are: dataset, disaggregation variable, question to analyze, and weight column.<br />
+</p>
+<div id="example1" class="section level3 hasAnchor" number="7.3.1">
+<h3 class="hasAnchor"><span class="header-section-number">7.3.1</span> Example1:<br />
+<a href="analysis.html#example1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Question</strong>: e11_items_do_not_have_per_hh<br />
+<strong>Disaggregation variable</strong>: b9_hohh_marital_status<br />
+<strong>weights column</strong>: stratum.weight<br />
+</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="analysis.html#cb143-1" aria-hidden="true" tabindex="-1"></a>ratios_select_multiple <span class="ot">&lt;-</span></span>
+<span id="cb143-2"><a href="analysis.html#cb143-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(df, x_var, y_prefix, weights_var) {</span>
+<span id="cb143-3"><a href="analysis.html#cb143-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
+<span id="cb143-4"><a href="analysis.html#cb143-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>({</span>
+<span id="cb143-5"><a href="analysis.html#cb143-5" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb143-6"><a href="analysis.html#cb143-6" aria-hidden="true" tabindex="-1"></a>          x_var</span>
+<span id="cb143-7"><a href="analysis.html#cb143-7" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb143-8"><a href="analysis.html#cb143-8" aria-hidden="true" tabindex="-1"></a>      }) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(y_prefix)) <span class="sc">%&gt;%</span></span>
+<span id="cb143-9"><a href="analysis.html#cb143-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="fu">paste0</span>(y_prefix, <span class="st">&quot;.&quot;</span>)),</span>
+<span id="cb143-10"><a href="analysis.html#cb143-10" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">list</span>(<span class="at">pct =</span> <span class="sc">~</span> <span class="fu">weighted.mean</span>(., {</span>
+<span id="cb143-11"><a href="analysis.html#cb143-11" aria-hidden="true" tabindex="-1"></a>                         {</span>
+<span id="cb143-12"><a href="analysis.html#cb143-12" aria-hidden="true" tabindex="-1"></a>                           weights_var</span>
+<span id="cb143-13"><a href="analysis.html#cb143-13" aria-hidden="true" tabindex="-1"></a>                         }</span>
+<span id="cb143-14"><a href="analysis.html#cb143-14" aria-hidden="true" tabindex="-1"></a>                       }, <span class="at">na.rm =</span> T))))</span>
+<span id="cb143-15"><a href="analysis.html#cb143-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb143-16"><a href="analysis.html#cb143-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-17"><a href="analysis.html#cb143-17" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span></span>
+<span id="cb143-18"><a href="analysis.html#cb143-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ratios_select_multiple</span>(</span>
+<span id="cb143-19"><a href="analysis.html#cb143-19" aria-hidden="true" tabindex="-1"></a>    main_dataset,</span>
+<span id="cb143-20"><a href="analysis.html#cb143-20" aria-hidden="true" tabindex="-1"></a>    b9_hohh_marital_status,</span>
+<span id="cb143-21"><a href="analysis.html#cb143-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;e11_items_do_not_have_per_hh&quot;</span>,</span>
+<span id="cb143-22"><a href="analysis.html#cb143-22" aria-hidden="true" tabindex="-1"></a>    stratum.weight</span>
+<span id="cb143-23"><a href="analysis.html#cb143-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb143-24"><a href="analysis.html#cb143-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-25"><a href="analysis.html#cb143-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   b9_hohh_marital_status      e11_items_do_no… e11_items_do_no… e11_items_do_no…
+##   &lt;chr&gt;                                  &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 divorced                              0.0851           0.0859            0.393
+## 2 married                               0.0496           0.0545            0.409
+## 3 separated_married_but_not_…           0.0138           0.0513            0.443
+## 4 single                                0.0726           0.0516            0.457
+## 5 unmarried_but_living_toget…           0.0874           0.101             0.293
+## 6 widowed                               0.106            0.0923            0.504
+## # … with 1 more variable:
+## #   e11_items_do_not_have_per_hh.hh_has_all_items_pct &lt;dbl&gt;</code></pre>
+</div>
+<div id="example2---analyzing-multiple-questions-and-combine-the-output" class="section level3 hasAnchor" number="7.3.2">
+<h3 class="hasAnchor"><span class="header-section-number">7.3.2</span> Example2 - Analyzing multiple questions and combine the output:<br />
+<a href="analysis.html#example2---analyzing-multiple-questions-and-combine-the-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Question</strong>: e11_items_do_not_have_per_hh and b11_hohh_chronic_illness<br />
+<strong>Disaggregation variable</strong>: b9_hohh_marital_status<br />
+<strong>weights column</strong>: stratum.weight<br />
+</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="analysis.html#cb145-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span></span>
+<span id="cb145-2"><a href="analysis.html#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(<span class="st">&quot;full_join&quot;</span>, <span class="fu">map</span>(</span>
+<span id="cb145-3"><a href="analysis.html#cb145-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;e11_items_do_not_have_per_hh&quot;</span>, <span class="st">&quot;b11_hohh_chronic_illness&quot;</span>),</span>
+<span id="cb145-4"><a href="analysis.html#cb145-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">ratios_select_multiple</span>(main_dataset, b9_hohh_marital_status, .x, stratum.weight)</span>
+<span id="cb145-5"><a href="analysis.html#cb145-5" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
+<pre><code>## Joining, by = &quot;b9_hohh_marital_status&quot;</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="analysis.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 18
+##   b9_hohh_marital_status      e11_items_do_no… e11_items_do_no… e11_items_do_no…
+##   &lt;chr&gt;                                  &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 divorced                              0.0851           0.0859            0.393
+## 2 married                               0.0496           0.0545            0.409
+## 3 separated_married_but_not_…           0.0138           0.0513            0.443
+## 4 single                                0.0726           0.0516            0.457
+## 5 unmarried_but_living_toget…           0.0874           0.101             0.293
+## 6 widowed                               0.106            0.0923            0.504
+## # … with 14 more variables:
+## #   e11_items_do_not_have_per_hh.hh_has_all_items_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.blood_pressure_diseases_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.cardiovascular_disease_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.diabetes_need_insulin_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.diabetes_does_not_need_insulin_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.chronic_respiratory_condition_pct &lt;dbl&gt;, …</code></pre>
+</div>
+<div id="example3---no-dissagregation-is-needed-andor-the-data-is-not-weighted" class="section level3 hasAnchor" number="7.3.3">
+<h3 class="hasAnchor"><span class="header-section-number">7.3.3</span> Example3 - No dissagregation is needed and/or the data is not weighted:<br />
+<a href="analysis.html#example3---no-dissagregation-is-needed-andor-the-data-is-not-weighted" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Question</strong>: e11_items_do_not_have_per_hh and b11_hohh_chronic_illness<br />
+<strong>Disaggregation variable</strong>: NA<br />
+<strong>weights column</strong>: NA<br />
+</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="analysis.html#cb149-1" aria-hidden="true" tabindex="-1"></a>main_dataset<span class="sc">$</span>all <span class="ot">&lt;-</span> <span class="st">&quot;all&quot;</span></span>
+<span id="cb149-2"><a href="analysis.html#cb149-2" aria-hidden="true" tabindex="-1"></a>main_dataset<span class="sc">$</span>no_weights <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb149-3"><a href="analysis.html#cb149-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb149-4"><a href="analysis.html#cb149-4" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span></span>
+<span id="cb149-5"><a href="analysis.html#cb149-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(<span class="st">&quot;full_join&quot;</span>, <span class="fu">map</span>(</span>
+<span id="cb149-6"><a href="analysis.html#cb149-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;e11_items_do_not_have_per_hh&quot;</span>, <span class="st">&quot;b11_hohh_chronic_illness&quot;</span>),</span>
+<span id="cb149-7"><a href="analysis.html#cb149-7" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">ratios_select_multiple</span>(main_dataset, all, .x, no_weights)</span>
+<span id="cb149-8"><a href="analysis.html#cb149-8" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
+<pre><code>## Joining, by = &quot;all&quot;</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="analysis.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 18
+##   all   e11_items_do_not_hav… e11_items_do_no… e11_items_do_no… e11_items_do_no…
+##   &lt;chr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 all                  0.0804           0.0779            0.417            0.515
+## # … with 13 more variables:
+## #   b11_hohh_chronic_illness.blood_pressure_diseases_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.cardiovascular_disease_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.diabetes_need_insulin_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.diabetes_does_not_need_insulin_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.chronic_respiratory_condition_pct &lt;dbl&gt;,
+## #   b11_hohh_chronic_illness.musculoskeletal_system_and_joints_pct &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div id="weights" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Weights<a href="analysis.html#weights" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Weights can be used for different reasons. In most of cases, we will use weights to correct for difference between strata size. Once the population has a certain (big) size, for the same design, the size of the sample won’t change much. In the case of the dataset, there are 4 stratas:<br />
+- within 20km of the border in rural areas : 89,408 households<br />
+- within 20km of the border in urban areas : 203,712 households<br />
+- within 20km of the border in rural areas : 39,003 households<br />
+- within 20km of the border in rural areas : 211,857 households</p>
+<p>Using any sampling calculator, for a 95% confindence level, 5% margin of error and 5% buffer, we will have around 400 samples per strata even though the urban areas are much bigger.<br />
+<em>Note: The error of 5% for 90,000 is 4,500 households while for 200,000 households is 10,000 households</em></p>
+<p>If we look at each strata and the highest level of education completed by the household head (<strong>b20_hohh_level_education</strong>), we can see that the percentage of household were the head of household completed higher education varies between between 7 to 13 % in each strata.</p>
+<pre><code>## # A tibble: 4 × 5
+## # Groups:   strata [4]
+##   strata     b20_hohh_level_education     n tot_n  prop
+##   &lt;chr&gt;      &lt;chr&gt;                    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+## 1 20km_rural complete_higher             40   407    10
+## 2 20km_urban complete_higher             51   404    13
+## 3 5km_rural  complete_higher             38   402     9
+## 4 5km_urban  complete_higher             28   404     7</code></pre>
+<p>However, if we want to know overall the percentage of who finished higher education we cannot just take the overall percentages, i.e. <span class="math inline">\(\frac{40 + 51 +38 + 28}{407 + 404 + 402 + 404}\)</span> = <span class="math inline">\(\frac{157}{1617}\)</span> = 10%.<br />
+We cannot do this because the first strata represent 90,000 households, the second 200,000 households, the third 40,000 households and the last one 210,000 households. We will use weights to compensate this difference.</p>
+<p>We will use this formula:<br />
+weight of strata = <span class="math inline">\(\frac{\frac{strata\\ population}{total\\ population}}{\frac{strata\\ sample}{total\\ sample}}\)</span></p>
+<div id="tidyverse" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> tidyverse<a href="analysis.html#tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following example will show how to calculate the weights with <strong>tidyverse</strong>.</p>
+<p>To calculate weights, we will need all the following information: - <em>population of the strata</em>,<br />
+- <em>total population</em>,<br />
+- <em>sample</em> and<br />
+- <em>total sample</em>.<br />
+The population information should come from the sampling frame that was used to draw the sampling.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="analysis.html#cb154-1" aria-hidden="true" tabindex="-1"></a>my_sampling_frame <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;inputs/UKR2007_MSNA20_GCA_Weights_26AUG2020.xlsx&quot;</span>, </span>
+<span id="cb154-2"><a href="analysis.html#cb154-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">sheet =</span> <span class="st">&quot;for_r&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb154-3"><a href="analysis.html#cb154-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">population_strata =</span> population)</span>
+<span id="cb154-4"><a href="analysis.html#cb154-4" aria-hidden="true" tabindex="-1"></a>my_sampling_frame</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   strata     population_strata
+##   &lt;chr&gt;                  &lt;dbl&gt;
+## 1 20km_rural             89408
+## 2 20km_urban            230712
+## 3 5km_rural              39003
+## 4 5km_urban             211857</code></pre>
+<p>Then, we need to get the actual sample from the dataset.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="analysis.html#cb156-1" aria-hidden="true" tabindex="-1"></a>sample_per_strata_table <span class="ot">&lt;-</span> main_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb156-2"><a href="analysis.html#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-3"><a href="analysis.html#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb156-4"><a href="analysis.html#cb156-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">strata_sample =</span> n) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-5"><a href="analysis.html#cb156-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb156-6"><a href="analysis.html#cb156-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-7"><a href="analysis.html#cb156-7" aria-hidden="true" tabindex="-1"></a>sample_per_strata_table</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   strata     strata_sample
+##   &lt;chr&gt;              &lt;int&gt;
+## 1 20km_rural           407
+## 2 20km_urban           404
+## 3 5km_rural            402
+## 4 5km_urban            404</code></pre>
+<p>Then, we can join the tables together and calculate the weights per strata.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="analysis.html#cb158-1" aria-hidden="true" tabindex="-1"></a>weight_table <span class="ot">&lt;-</span> sample_per_strata_table <span class="sc">%&gt;%</span> </span>
+<span id="cb158-2"><a href="analysis.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(my_sampling_frame) <span class="sc">%&gt;%</span> </span>
+<span id="cb158-3"><a href="analysis.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weights =</span> (population_strata<span class="sc">/</span><span class="fu">sum</span>(population_strata))<span class="sc">/</span>(strata_sample<span class="sc">/</span><span class="fu">sum</span>(strata_sample)))</span>
+<span id="cb158-4"><a href="analysis.html#cb158-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-5"><a href="analysis.html#cb158-5" aria-hidden="true" tabindex="-1"></a>weight_table</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 4
+##   strata     strata_sample population_strata weights
+##   &lt;chr&gt;              &lt;int&gt;             &lt;dbl&gt;   &lt;dbl&gt;
+## 1 20km_rural           407             89408   0.622
+## 2 20km_urban           404            230712   1.62 
+## 3 5km_rural            402             39003   0.275
+## 4 5km_urban            404            211857   1.49</code></pre>
+<p>Then we can finally add them to the dataset.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="analysis.html#cb160-1" aria-hidden="true" tabindex="-1"></a>main_dataset <span class="ot">&lt;-</span> main_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb160-2"><a href="analysis.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">select</span>(weight_table, strata, weights), <span class="at">by =</span> <span class="st">&quot;strata&quot;</span>)</span>
+<span id="cb160-3"><a href="analysis.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(main_dataset<span class="sc">$</span>weights)</span></code></pre></div>
+<pre><code>## [1] 0.2747648 0.2747648 0.6221156 0.6221156 0.6221156 0.6221156</code></pre>
+<p>We can check that each strata has only 1 weight.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="analysis.html#cb162-1" aria-hidden="true" tabindex="-1"></a>main_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb162-2"><a href="analysis.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata, weights) <span class="sc">%&gt;%</span></span>
+<span id="cb162-3"><a href="analysis.html#cb162-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+## # Groups:   strata [4]
+##   strata     weights     n
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt;
+## 1 20km_rural   0.622   407
+## 2 20km_urban   1.62    404
+## 3 5km_rural    0.275   402
+## 4 5km_urban    1.49    404</code></pre>
+<p>We can check that the sum of weights is equal to the number of interviews.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="analysis.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(main_dataset<span class="sc">$</span>weights) <span class="sc">==</span> <span class="fu">nrow</span>(main_dataset)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="surveyweights" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> surveyweights<a href="analysis.html#surveyweights" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>surveyweights</strong> was created to calculate weights. The function <strong>weighting_fun_from_samplingframe</strong> creates a function that calculates weights from the dataset and the sampling frame.</p>
+<p><em>Note: surveyweights can be found on <a href="https://github.com/impact-initiatives/surveyweights">github</a>.</em></p>
+<p>First you need to create the weighting function. <strong>weighting_fun_from_samplingframe</strong> will take 5 arguments:<br />
+- sampling.frame: a data frame with your population figures and stratas.<br />
+- data.stratum.column : column name of the strata in the dataset.<br />
+- sampling.frame.population.column : column name of population figures in the sampling frame.<br />
+- sampling.frame.stratum.column : column name of the strata in the sampling frame.<br />
+- data : dataset</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="analysis.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(surveyweights)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;surveyweights&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:hypegrammaR&#39;:
+## 
+##     combine_weighting_functions</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="analysis.html#cb169-1" aria-hidden="true" tabindex="-1"></a>my_weigthing_function <span class="ot">&lt;-</span> surveyweights<span class="sc">::</span><span class="fu">weighting_fun_from_samplingframe</span>(<span class="at">sampling.frame =</span> my_sampling_frame,</span>
+<span id="cb169-2"><a href="analysis.html#cb169-2" aria-hidden="true" tabindex="-1"></a>                                                                      <span class="at">data.stratum.column =</span> <span class="st">&quot;strata&quot;</span>,</span>
+<span id="cb169-3"><a href="analysis.html#cb169-3" aria-hidden="true" tabindex="-1"></a>                                                                      <span class="at">sampling.frame.population.column =</span> <span class="st">&quot;population_strata&quot;</span>, </span>
+<span id="cb169-4"><a href="analysis.html#cb169-4" aria-hidden="true" tabindex="-1"></a>                                                                      <span class="at">sampling.frame.stratum.column =</span> <span class="st">&quot;strata&quot;</span>, </span>
+<span id="cb169-5"><a href="analysis.html#cb169-5" aria-hidden="true" tabindex="-1"></a>                                                                      <span class="at">data =</span> main_dataset)</span></code></pre></div>
+<p>See that the <strong>my_weigthing_function</strong> is not a vector of weights. It is a function that takes the dataset as argument and returns a vector of weights.</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="analysis.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.function</span>(my_weigthing_function)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="analysis.html#cb172-1" aria-hidden="true" tabindex="-1"></a>my_weigthing_function</span></code></pre></div>
+<pre><code>## function (df) 
+## {
+##     if (!is.data.frame(df)) {
+##         stop(&quot;df must be a data.frame&quot;)
+##     }
+##     df &lt;- as.data.frame(df, stringsAsFactors = FALSE)
+##     df &lt;- lapply(df, function(x) {
+##         if (is.factor(x)) {
+##             return(as.character(x))
+##         }
+##         x
+##     }) %&gt;% as.data.frame(stringsAsFactors = FALSE)
+##     if (!all(data.stratum.column %in% names(df))) {
+##         stop(paste0(&quot;data frame column &#39;&quot;, data.stratum.column, 
+##             &quot;&#39;not found.&quot;))
+##     }
+##     df[[data.stratum.column]] &lt;- as.character(df[[data.stratum.column]])
+##     sample.counts &lt;- stratify.count.sample(data.strata = asdhk[[data.stratum.column]], 
+##         sf.strata = population.counts)
+##     if (&quot;weights&quot; %in% names(df)) {
+##         warning(&quot;&#39;weights&#39; is used as a column name (will not be calculated from the sampling frame)&quot;)
+##     }
+##     if (!all(names(sample.counts) %in% names(population.counts))) {
+##         stop(&quot;all strata names in column &#39;&quot;, data.stratum.column, 
+##             &quot;&#39; must also appear in the loaded sampling frame.&quot;)
+##     }
+##     weights &lt;- stratify.weights(pop_strata = population.counts, 
+##         sample_strata = sample.counts)
+##     return(weights[df[[data.stratum.column]]])
+## }
+## &lt;bytecode: 0x55e497fccb40&gt;
+## &lt;environment: 0x55e498039e28&gt;</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="analysis.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_weigthing_function</span>(main_dataset) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## Warning in my_weigthing_function(main_dataset): &#39;weights&#39; is used as a column
+## name (will not be calculated from the sampling frame)</code></pre>
+<pre><code>## data.strata
+##  5km_rural  5km_rural 20km_rural 20km_rural 20km_rural 20km_rural 
+##  0.2747648  0.2747648  0.6221156  0.6221156  0.6221156  0.6221156</code></pre>
+<p><em>Note: A warning shows that if the column weights exists in the dataset, <strong>my_weigthing_function</strong> will not calculate weights. We need to remove the weights column from the previous example.</em></p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="analysis.html#cb177-1" aria-hidden="true" tabindex="-1"></a>main_dataset<span class="sc">$</span>weights <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb177-2"><a href="analysis.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">my_weigthing_function</span>(main_dataset) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## data.strata
+##  5km_rural  5km_rural 20km_rural 20km_rural 20km_rural 20km_rural 
+##  0.2747648  0.2747648  0.6221156  0.6221156  0.6221156  0.6221156</code></pre>
+<p>To add the weights, we need to add a new column.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="analysis.html#cb179-1" aria-hidden="true" tabindex="-1"></a>main_dataset<span class="sc">$</span>my_weights <span class="ot">&lt;-</span> <span class="fu">my_weigthing_function</span>(main_dataset)</span>
+<span id="cb179-2"><a href="analysis.html#cb179-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-3"><a href="analysis.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(main_dataset<span class="sc">$</span>my_weights)</span></code></pre></div>
+<pre><code>## [1] 0.2747648 0.2747648 0.6221156 0.6221156 0.6221156 0.6221156</code></pre>
+<p>As for the previous example, we can check that only 1 weight is used per strata.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="analysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>main_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb181-2"><a href="analysis.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(strata, my_weights) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-3"><a href="analysis.html#cb181-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+## # Groups:   strata [4]
+##   strata     my_weights      n
+##   &lt;chr&gt;      &lt;table[1d]&gt; &lt;int&gt;
+## 1 20km_rural 0.6221156     407
+## 2 20km_urban 1.6172529     404
+## 3 5km_rural  0.2747648     402
+## 4 5km_urban  1.4850825     404</code></pre>
+<p>We can check that the sum of weights is equal to the number of interviews.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="analysis.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(main_dataset<span class="sc">$</span>my_weights) <span class="sc">==</span> <span class="fu">nrow</span>(main_dataset)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="repeating-the-above" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Repeating the above<a href="analysis.html#repeating-the-above" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="analysis---top-x-ranking-select-one-and-select-multiple" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Analysis - top X / ranking (select one and select multiple)<a href="analysis.html#analysis---top-x-ranking-select-one-and-select-multiple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First: select_one question</p>
+<p>The indicator of interest is <strong>e1_shelter_type</strong> and the options are:</p>
+<ul>
+<li>solid_finished_house</li>
+<li>solid_finished_apartment</li>
+<li>unfinished_nonenclosed_building</li>
+<li>collective_shelter</li>
+<li>tent</li>
+<li>makeshift_shelter</li>
+<li>none_sleeping_in_open</li>
+<li>other_specify</li>
+<li>dont_know_refuse_to_answer</li>
+</ul>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="analysis.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top X/ranking for select_one type questions </span></span>
+<span id="cb185-2"><a href="analysis.html#cb185-2" aria-hidden="true" tabindex="-1"></a>select_one_topX <span class="ot">&lt;-</span> <span class="cf">function</span>(df, question_name, <span class="at">X =</span> <span class="dv">3</span>) { <span class="co"># by default return top 3</span></span>
+<span id="cb185-3"><a href="analysis.html#cb185-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># test message</span></span>
+<span id="cb185-4"><a href="analysis.html#cb185-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(<span class="fu">colnames</span>(df)[<span class="fu">grepl</span>(question_name, <span class="fu">colnames</span>(df), <span class="at">fixed =</span> T)]) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb185-5"><a href="analysis.html#cb185-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;question name:&quot;</span>, question_name, <span class="st">&quot;doesn&#39;t exist in the main dataset. Please double check and make required changes!&quot;</span>)))</span>
+<span id="cb185-6"><a href="analysis.html#cb185-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb185-7"><a href="analysis.html#cb185-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb185-8"><a href="analysis.html#cb185-8" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb185-9"><a href="analysis.html#cb185-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">!!</span><span class="fu">sym</span>(question_name))<span class="sc">%&gt;%</span>          </span>
+<span id="cb185-10"><a href="analysis.html#cb185-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(question_name))) <span class="sc">%&gt;%</span> <span class="co"># remove NA values from percentage calculations </span></span>
+<span id="cb185-11"><a href="analysis.html#cb185-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_at</span>(question_name, as.factor) <span class="sc">%&gt;%</span>  <span class="co"># added to have all groups</span></span>
+<span id="cb185-12"><a href="analysis.html#cb185-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(question_name), <span class="at">.drop=</span>F) <span class="sc">%&gt;%</span> </span>
+<span id="cb185-13"><a href="analysis.html#cb185-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb185-14"><a href="analysis.html#cb185-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">percentages =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb185-15"><a href="analysis.html#cb185-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(percentages)) <span class="sc">%&gt;%</span> </span>
+<span id="cb185-16"><a href="analysis.html#cb185-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_at</span>(question_name, as.character) <span class="sc">%&gt;%</span> </span>
+<span id="cb185-17"><a href="analysis.html#cb185-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(X)   <span class="co"># keep top X percentages only </span></span>
+<span id="cb185-18"><a href="analysis.html#cb185-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb185-19"><a href="analysis.html#cb185-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(df) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">warning</span>(<span class="st">&quot;None of the choices was selected!&quot;</span>)</span>
+<span id="cb185-20"><a href="analysis.html#cb185-20" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb185-21"><a href="analysis.html#cb185-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb185-22"><a href="analysis.html#cb185-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb185-23"><a href="analysis.html#cb185-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-24"><a href="analysis.html#cb185-24" aria-hidden="true" tabindex="-1"></a><span class="co"># return top 4 shelter types</span></span>
+<span id="cb185-25"><a href="analysis.html#cb185-25" aria-hidden="true" tabindex="-1"></a>shelter_type_top4 <span class="ot">&lt;-</span> <span class="fu">select_one_topX</span>(<span class="at">df =</span> main_dataset, <span class="at">question_name =</span> <span class="st">&quot;e1_shelter_type&quot;</span>, <span class="at">X =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p>Second: select_multiple question</p>
+<p>The indicator of interest is <strong>e3_shelter_enclosure_issues</strong> and the options are:</p>
+<ul>
+<li>no_issues</li>
+<li>lack_of_insulation_from_cold</li>
+<li>leaks_during_light_rain_snow</li>
+<li>leaks_during_heavy_rain_snow</li>
+<li>limited_ventilation_less_than_05m2_ventilation_in_each_room_including_kitchen</li>
+<li>presence_of_dirt_or_debris_removable</li>
+<li>presence_of_dirt_or_debris_nonremovable</li>
+<li>none_of_the_above</li>
+<li>other_specify</li>
+<li>dont_know</li>
+</ul>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="analysis.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top X/ranking for select_multiple type questions</span></span>
+<span id="cb186-2"><a href="analysis.html#cb186-2" aria-hidden="true" tabindex="-1"></a>select_multiple_topX <span class="ot">&lt;-</span> <span class="cf">function</span>(df, question_name, <span class="at">X =</span> <span class="dv">3</span>) {</span>
+<span id="cb186-3"><a href="analysis.html#cb186-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># test message</span></span>
+<span id="cb186-4"><a href="analysis.html#cb186-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(<span class="fu">colnames</span>(df)[<span class="fu">grepl</span>(question_name, <span class="fu">colnames</span>(df), <span class="at">fixed =</span> T)]) <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb186-5"><a href="analysis.html#cb186-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;question name:&quot;</span>, question_name, <span class="st">&quot;doesn&#39;t exist in the main dataset. Please double check and make required changes!&quot;</span>)))</span>
+<span id="cb186-6"><a href="analysis.html#cb186-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb186-7"><a href="analysis.html#cb186-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb186-8"><a href="analysis.html#cb186-8" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb186-9"><a href="analysis.html#cb186-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">colnames</span>(df)[<span class="fu">grepl</span>(<span class="fu">paste0</span>(question_name, <span class="st">&quot;.&quot;</span>), <span class="fu">colnames</span>(df), <span class="at">fixed =</span> T)])</span>
+<span id="cb186-10"><a href="analysis.html#cb186-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb186-11"><a href="analysis.html#cb186-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if question was not answered</span></span>
+<span id="cb186-12"><a href="analysis.html#cb186-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">is.na</span>(df))) <span class="fu">warning</span>(<span class="st">&quot;None of the choices was selected!&quot;</span>)</span>
+<span id="cb186-13"><a href="analysis.html#cb186-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-14"><a href="analysis.html#cb186-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keeping only the options names in the colnames</span></span>
+<span id="cb186-15"><a href="analysis.html#cb186-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="fu">paste0</span>(question_name, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>), <span class="st">&quot;&quot;</span>, <span class="fu">colnames</span>(df))</span>
+<span id="cb186-16"><a href="analysis.html#cb186-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb186-17"><a href="analysis.html#cb186-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate top X percentages</span></span>
+<span id="cb186-18"><a href="analysis.html#cb186-18" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb186-19"><a href="analysis.html#cb186-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_all</span>(as.numeric) <span class="sc">%&gt;%</span> </span>
+<span id="cb186-20"><a href="analysis.html#cb186-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> question_name, <span class="at">values_to =</span> <span class="st">&quot;choices&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb186-21"><a href="analysis.html#cb186-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(question_name), <span class="at">.drop=</span>F) <span class="sc">%&gt;%</span> </span>
+<span id="cb186-22"><a href="analysis.html#cb186-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">sum</span>(choices, <span class="at">na.rm =</span> T),</span>
+<span id="cb186-23"><a href="analysis.html#cb186-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">percentages =</span> <span class="fu">round</span>(<span class="fu">sum</span>(choices, <span class="at">na.rm =</span> T) <span class="sc">/</span> <span class="fu">n</span>() <span class="sc">*</span> <span class="dv">100</span>, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="co"># remove NA values from percentages calculations</span></span>
+<span id="cb186-24"><a href="analysis.html#cb186-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(percentages)) <span class="sc">%&gt;%</span> </span>
+<span id="cb186-25"><a href="analysis.html#cb186-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(X)   <span class="co"># keep top X percentages only </span></span>
+<span id="cb186-26"><a href="analysis.html#cb186-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb186-27"><a href="analysis.html#cb186-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb186-28"><a href="analysis.html#cb186-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb186-29"><a href="analysis.html#cb186-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-30"><a href="analysis.html#cb186-30" aria-hidden="true" tabindex="-1"></a><span class="co"># return top 7 shelter enclosure issues</span></span>
+<span id="cb186-31"><a href="analysis.html#cb186-31" aria-hidden="true" tabindex="-1"></a>shelter_enclosure_issues_top7 <span class="ot">&lt;-</span> <span class="fu">select_multiple_topX</span>(<span class="at">df =</span> main_dataset, <span class="at">question_name =</span> <span class="st">&quot;e3_shelter_enclosure_issues&quot;</span>, <span class="at">X =</span> <span class="dv">7</span>)</span></code></pre></div>
+</div>
+<div id="borda-count" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Borda count<a href="analysis.html#borda-count" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="hypothesis-testing" class="section level2 hasAnchor" number="7.8">
+<h2><span class="header-section-number">7.8</span> Hypothesis testing<a href="analysis.html#hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="t-test" class="section level3 hasAnchor" number="7.8.1">
+<h3><span class="header-section-number">7.8.1</span> T-test<a href="analysis.html#t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="what-is-a-t-test" class="section level4 hasAnchor" number="7.8.1.1">
+<h4><span class="header-section-number">7.8.1.1</span> What is a T-test<a href="analysis.html#what-is-a-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A t-test is a type of inferential statistic used to determine if there is a significant difference between the means of two groups. A t-test is used as a hypothesis testing tool, which allows testing of an assumption applicable to a population.</p>
+</div>
+<div id="how-it-works" class="section level4 hasAnchor" number="7.8.1.2">
+<h4><span class="header-section-number">7.8.1.2</span> How it works<a href="analysis.html#how-it-works" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Mathematically, the t-test takes a sample from each of the two sets and establishes the problem statement by assuming a null hypothesis that the two means are equal. Based on the applicable formulas, certain values are calculated and compared against the standard values, and the assumed null hypothesis is accepted or rejected accordingly.</p>
+<p>If the null hypothesis qualifies to be rejected, it indicates that data readings are strong and are probably not due to chance.</p>
+</div>
+<div id="t-test-assumptions" class="section level4 hasAnchor" number="7.8.1.3">
+<h4><span class="header-section-number">7.8.1.3</span> T-Test Assumptions<a href="analysis.html#t-test-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>The first assumption made regarding t-tests concerns the scale of measurement. The assumption for a t-test is that the scale of measurement applied to the data collected follows a continuous or ordinal scale, such as the scores for an IQ test.</p></li>
+<li><p>The second assumption made is that of a simple random sample, that the data is collected from a representative, randomly selected portion of the total population.</p></li>
+<li><p>The third assumption is the data, when plotted, results in a normal distribution, bell-shaped distribution curve.</p></li>
+<li><p>The final assumption is the homogeneity of variance. Homogeneous, or equal, variance exists when the standard deviations of samples are approximately equal.</p></li>
+</ul>
+</div>
+<div id="example" class="section level4 hasAnchor" number="7.8.1.4">
+<h4><span class="header-section-number">7.8.1.4</span> Example<a href="analysis.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We are going to look at the income of the household for female/male headed household. The main_dataset doesn’t contain the head of household gender information, so we are creating and randomly populating the gender variable.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="analysis.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb187-2"><a href="analysis.html#cb187-2" aria-hidden="true" tabindex="-1"></a>main_dataset<span class="sc">$</span>hoh_gender <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&#39;Male&#39;</span>, <span class="st">&#39;Female&#39;</span>), <span class="fu">nrow</span>(main_dataset), <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb187-3"><a href="analysis.html#cb187-3" aria-hidden="true" tabindex="-1"></a>main_dataset<span class="sc">$</span>b15_hohh_income <span class="ot">=</span> <span class="fu">as.numeric</span>(main_dataset<span class="sc">$</span>b15_hohh_income)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="analysis.html#cb188-1" aria-hidden="true" tabindex="-1"></a>t_test_results <span class="ot">&lt;-</span> <span class="fu">t.test</span>(b15_hohh_income <span class="sc">~</span> hoh_gender, <span class="at">data =</span> main_dataset)</span>
+<span id="cb188-2"><a href="analysis.html#cb188-2" aria-hidden="true" tabindex="-1"></a>t_test_results</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  b15_hohh_income by hoh_gender
+## t = 0.19105, df = 1525.6, p-value = 0.8485
+## alternative hypothesis: true difference in means between group Female and group Male is not equal to 0
+## 95 percent confidence interval:
+##  -270.3420  328.6883
+## sample estimates:
+## mean in group Female   mean in group Male 
+##             3459.044             3429.871</code></pre>
+<p>In the result above :</p>
+<p>t is the t-test statistic value (t = -0.19105),
+df is the degrees of freedom (df= 1525.6),
+p-value is the significance level of the t-test (p-value = 0.8485).
+conf.int is the confidence interval of the means difference at 95% (conf.int = [-270.3420, 328.6883]);
+sample estimates is the mean value of the sample (mean = 3459.044, 3429.871).</p>
+<p><strong>Interpretation:</strong></p>
+<p>The p-value of the test is 0.8485, which is higher than the significance level alpha = 0.05. We can’t reject the null hypothesis and we can’t conclude that men headed household average income is significantly different from women headed household average income. Which makes sense in this case given that the gender variable was randomly generated.</p>
+</div>
+</div>
+<div id="anova" class="section level3 hasAnchor" number="7.8.2">
+<h3><span class="header-section-number">7.8.2</span> ANOVA<a href="analysis.html#anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="what-is-anova" class="section level4 hasAnchor" number="7.8.2.1">
+<h4><span class="header-section-number">7.8.2.1</span> What is ANOVA<a href="analysis.html#what-is-anova" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Similar to T-test, ANOVA is a statistical test for estimating how a quantitative dependent variable changes according to the levels of one or more categorical independent variables. ANOVA tests whether there is a difference in means of the groups at each level of the independent variable.</p>
+<p>The null hypothesis (H0) of the ANOVA is no difference in means, and the alternate hypothesis (Ha) is that the means are different from one another.</p>
+<p>The T-test is used to compare the means between two groups, whereas ANOVA is used to compare the means among three or more groups.</p>
+</div>
+<div id="types-of-anova" class="section level4 hasAnchor" number="7.8.2.2">
+<h4><span class="header-section-number">7.8.2.2</span> Types of ANOVA<a href="analysis.html#types-of-anova" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>There are two main types of ANOVA: one-way (or unidirectional) and two-way.
+A two-way ANOVA is an extension of the one-way ANOVA. With a one-way, you have one independent variable affecting a dependent variable. With a two-way ANOVA, there are two independents. For example, a two-way ANOVA allows a company to compare worker productivity based on two independent variables, such as salary and skill set. It is utilized to observe the interaction between the two factors and tests the effect of two factors at the same time.</p>
+</div>
+<div id="example-1" class="section level4 hasAnchor" number="7.8.2.3">
+<h4><span class="header-section-number">7.8.2.3</span> Example<a href="analysis.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We are using the same example as the previous test.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="analysis.html#cb190-1" aria-hidden="true" tabindex="-1"></a>res.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(b15_hohh_income <span class="sc">~</span> hoh_gender, <span class="at">data =</span> main_dataset)</span>
+<span id="cb190-2"><a href="analysis.html#cb190-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-3"><a href="analysis.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res.aov)</span></code></pre></div>
+<pre><code>##               Df    Sum Sq Mean Sq F value Pr(&gt;F)
+## hoh_gender     1 3.291e+05  329075   0.036  0.849
+## Residuals   1546 1.408e+10 9109185               
+## 69 observations deleted due to missingness</code></pre>
+<p>As the p-value is more than the significance level 0.05, we can’t conclude that there are significant differences between the hoh_gender groups.</p>
+</div>
+<div id="bonus-visualization-of-the-data-to-confirm-the-findinds" class="section level4 hasAnchor" number="7.8.2.4">
+<h4><span class="header-section-number">7.8.2.4</span> Bonus : Visualization of the data to confirm the findinds<a href="analysis.html#bonus-visualization-of-the-data-to-confirm-the-findinds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="analysis.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;ggpubr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:spatstat.geom&#39;:
+## 
+##     border, rotate</code></pre>
+<pre><code>## The following object is masked from &#39;package:expss&#39;:
+## 
+##     compare_means</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="analysis.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggline</span>(main_dataset, <span class="at">x =</span> <span class="st">&quot;hoh_gender&quot;</span>, <span class="at">y =</span> <span class="st">&quot;b15_hohh_income&quot;</span>, </span>
+<span id="cb196-2"><a href="analysis.html#cb196-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">add =</span> <span class="fu">c</span>(<span class="st">&quot;mean_se&quot;</span>, <span class="st">&quot;jitter&quot;</span>), </span>
+<span id="cb196-3"><a href="analysis.html#cb196-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">order =</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb196-4"><a href="analysis.html#cb196-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;HH income&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;hoh gender&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+</div>
+</div>
+<div id="chi-squares" class="section level3 hasAnchor" number="7.8.3">
+<h3><span class="header-section-number">7.8.3</span> chi-squares<a href="analysis.html#chi-squares" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pearson`s chi-squared test.
+Chi-squared test is a statistical hypothesis test, based on comparing expected and observed frequencies of 2-way distribution (2-way table).</p>
+<p>There are three types of tests (hypothesis) that could be tested with chi-squared: independence of variables, homogenity of distribution of the characteristic across “stratas” and goodness of fit (whether the actual distribution is different from the hypothetical one). Two former versions use the same calculation.</p>
+<p>Chi-squared test is a non-parametric test.
+It is used with nominal to nominal (nominal to ordinal) scales.
+For running chi-squared test, each cell of the crosstab should contain at least 5 observations.</p>
+<p>Note, that chi-squared test indicates significance of differences in values on a <em>table level</em>. Thus, it is impossible to track significance in differences for particular options.</p>
+<p>(For example, it is possible to say that satisfaction with public transport and living in urban / rural areas are connected. However, we can conclude from the test itself, that “satisfied” and “dissatisfied” options differ, while “indifferent” does not. By the way, it is possible to come up with this conclusion while interpreting a corresponding crosstab. Also, chi-squared test can tell nothing about the strength and the direction of a liaison between variables).</p>
+<div id="chi-squared-test-for-independence" class="section level4 hasAnchor" number="7.8.3.1">
+<h4><span class="header-section-number">7.8.3.1</span> Chi-squared test for independence<a href="analysis.html#chi-squared-test-for-independence" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The test for weighted data is being run with the survey library</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="analysis.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb197-2"><a href="analysis.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb197-3"><a href="analysis.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(weights)</span></code></pre></div>
+<p>The use of the survey package functions requires specifying survey design object (which reslects sampling approach).</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="analysis.html#cb198-1" aria-hidden="true" tabindex="-1"></a>main_dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;inputs/UKR2007_MSNA20_HH_dataset_main_rcop.csv&quot;</span>, <span class="at">na.strings =</span> <span class="st">&quot;&quot;</span>, <span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb198-2"><a href="analysis.html#cb198-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-3"><a href="analysis.html#cb198-3" aria-hidden="true" tabindex="-1"></a>svy_design <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(<span class="at">data=</span>main_dataset, </span>
+<span id="cb198-4"><a href="analysis.html#cb198-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">id =</span> <span class="sc">~</span><span class="dv">1</span>, </span>
+<span id="cb198-5"><a href="analysis.html#cb198-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">strata =</span> main_dataset<span class="sc">$</span>strata, </span>
+<span id="cb198-6"><a href="analysis.html#cb198-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">probs =</span> <span class="cn">NULL</span>,</span>
+<span id="cb198-7"><a href="analysis.html#cb198-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">weights =</span> main_dataset<span class="sc">$</span>stratum.weight)</span></code></pre></div>
+<p>Specifying function for getting chi-squared outputs.</p>
+<p>Hereby test Chi^2 test of independence is used. So, the test is performed to find out if strata variable and target variable are independent,
+<strong>H0</strong> - the distribution of target variable values is equal across all stratas
+<strong>H1</strong> - strata and target var are not independent, so distribution varies across stratas.</p>
+<p>Apart from getting test statistic and p value, we would like to detect manually what are the biggest and the smallest values across groups/stratas (in case if the difference is significant and it makes sense to do it).</p>
+<p>Hereby test Chi^2 test of independence is used. So, the test is performed to find out if strata variable and target variable are independent,
+H0 - the distribution of target var. values is equal across all stratas
+H1 - strata and target var are not independent, so distribution varies across stratas.</p>
+<p>Within the Survey package, the suggested function uses Scott &amp; Rao adjustment for complex survey design</p>
+<p>#####Simple single call of the test.</p>
+<p>Let’s say that the research aim is to understand whether the main water source is dependent on the area where HH lives (strata variable).</p>
+<p>Thus, in our case:
+H0 - the distribution of water source is equal across stratas and these variables are independent
+H1 - the distribution of water source differs by strata and these variables are not independent.</p>
+<p>Running the chi-squared test:</p>
+<p>(Survey version - requires a survey design object)</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="analysis.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svychisq</span>(<span class="sc">~</span> f11_dinking_water_source <span class="sc">+</span> strata, <span class="at">design =</span> svy_design, <span class="at">statistic =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s X^2: Rao &amp; Scott adjustment
+## 
+## data:  svychisq(~f11_dinking_water_source + strata, design = svy_design,     statistic = &quot;Chisq&quot;)
+## X-squared = 244.62, df = 21, p-value &lt; 2.2e-16</code></pre>
+<p>The current output presents the result of Pearson’s chi-squared test (Rao &amp; Scott adjustment accounts for weighted data) [<a href="https://www.researchgate.net/publication/38360147_On_Simple_Adjustments_to_Chi-Square_Tests_with_Sample_Survey_Data" class="uri">https://www.researchgate.net/publication/38360147_On_Simple_Adjustments_to_Chi-Square_Tests_with_Sample_Survey_Data</a>].</p>
+<p>The output consist of three parameters:
+1. X-squared - observed value of chi-squared parameter,
+2. df - “degrees of freedom” or number of independent categories in data -1
+Having only these two elements it is possible to see, if with the current number of df, the value of chi-squared parameter is greater than the critical value for the chosen level of probability, using (tables of chi-squared critical values) [<a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm" class="uri">https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm</a>]
+Fortunately, R provides us with the third parameter, which allows us to skip this step.
+3. p-value - stands for the probability of getting value of the chi-squared parameter greater or equal to the given one assuming that H0 is true. If p-value &lt; 0.05 (for 95% confidence level, or 0.01 for 99%), the H0 can be rejected.</p>
+<p>In the current example, as p-value is very low, H0 can be rejected, and hence, strata variable and drinking water source are not independent.</p>
+<p>(Weights package - can work with the dataframe directly, without the survey design object)</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="analysis.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wtd.chi.sq</span>(<span class="at">var1 =</span> main_dataset<span class="sc">$</span>f11_dinking_water_source, <span class="at">var2 =</span> main_dataset<span class="sc">$</span>strata, <span class="at">weight =</span> main_dataset<span class="sc">$</span>stratum.weight)</span></code></pre></div>
+<pre><code>##        Chisq           df      p.value 
+## 2.446205e+02 2.100000e+01 4.928158e-40</code></pre>
+<p>Specifying the function for crosstabs with chi-squared tests for independence.</p>
+<p>#####Functions to have test results along with crosstabs</p>
+<ol style="list-style-type: decimal">
+<li>The function with survey design object.</li>
+</ol>
+<p>Apart from getting test statistic and p value, we would like to detect manually what are the biggest and the smallest values across groups/stratas (in case if the difference is significant and it makes sense to do it).</p>
+<p>The function also helps to find out smallest and the largest values per row</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="analysis.html#cb203-1" aria-hidden="true" tabindex="-1"></a>chi2_ind_extr <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, design){</span>
+<span id="cb203-2"><a href="analysis.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  my_var <span class="ot">&lt;-</span> y</span>
+<span id="cb203-3"><a href="analysis.html#cb203-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-4"><a href="analysis.html#cb203-4" aria-hidden="true" tabindex="-1"></a><span class="co"># running Pearson&#39;s chi-squared test</span></span>
+<span id="cb203-5"><a href="analysis.html#cb203-5" aria-hidden="true" tabindex="-1"></a>  s_chi <span class="ot">&lt;-</span> <span class="fu">svychisq</span>(<span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;~&quot;</span>, x,<span class="st">&quot;+&quot;</span>, y)), design, <span class="at">statistic =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb203-6"><a href="analysis.html#cb203-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb203-7"><a href="analysis.html#cb203-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extracting basic parameters</span></span>
+<span id="cb203-8"><a href="analysis.html#cb203-8" aria-hidden="true" tabindex="-1"></a>  wmy_t <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(s_chi<span class="sc">$</span>observed)</span>
+<span id="cb203-9"><a href="analysis.html#cb203-9" aria-hidden="true" tabindex="-1"></a>  wmy_t<span class="sc">$</span>p <span class="ot">&lt;-</span> s_chi<span class="sc">$</span>p.value</span>
+<span id="cb203-10"><a href="analysis.html#cb203-10" aria-hidden="true" tabindex="-1"></a>  wmy_t<span class="sc">$</span>chi_adj <span class="ot">&lt;-</span> s_chi<span class="sc">$</span>statistic</span>
+<span id="cb203-11"><a href="analysis.html#cb203-11" aria-hidden="true" tabindex="-1"></a>  wmy_t<span class="sc">$</span>df <span class="ot">&lt;-</span> s_chi<span class="sc">$</span>parameter</span>
+<span id="cb203-12"><a href="analysis.html#cb203-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#indicating significance</span></span>
+<span id="cb203-13"><a href="analysis.html#cb203-13" aria-hidden="true" tabindex="-1"></a>  wmy_t<span class="sc">$</span>independence <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(wmy_t<span class="sc">$</span>p <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">&quot;h1&quot;</span>, <span class="st">&quot;h0&quot;</span>)</span>
+<span id="cb203-14"><a href="analysis.html#cb203-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(wmy_t)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;var_x&quot;</span>, <span class="st">&quot;var_y&quot;</span>)</span>
+<span id="cb203-15"><a href="analysis.html#cb203-15" aria-hidden="true" tabindex="-1"></a>  wmy_t_w <span class="ot">&lt;-</span> <span class="fu">spread</span>(wmy_t, var_y, Freq)</span>
+<span id="cb203-16"><a href="analysis.html#cb203-16" aria-hidden="true" tabindex="-1"></a>  wmy_t_w[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(x, <span class="st">&quot; &quot;</span>, wmy_t_w[,<span class="dv">1</span>])</span>
+<span id="cb203-17"><a href="analysis.html#cb203-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(wmy_t_w)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;variable&quot;</span></span>
+<span id="cb203-18"><a href="analysis.html#cb203-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># getting percent from weighted frequencies</span></span>
+<span id="cb203-19"><a href="analysis.html#cb203-19" aria-hidden="true" tabindex="-1"></a>  cols_no_prop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;p&quot;</span>, <span class="st">&quot;independence&quot;</span>, <span class="st">&quot;max&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;chi_adj&quot;</span>, <span class="st">&quot;df&quot;</span>)</span>
+<span id="cb203-20"><a href="analysis.html#cb203-20" aria-hidden="true" tabindex="-1"></a>  wmy_t_w[, <span class="sc">!</span><span class="fu">colnames</span>(wmy_t_w) <span class="sc">%in%</span> cols_no_prop] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(wmy_t_w[, <span class="sc">!</span><span class="fu">colnames</span>(wmy_t_w) <span class="sc">%in%</span> cols_no_prop], <span class="cf">function</span>(x){x<span class="sc">/</span><span class="fu">sum</span>(x, <span class="at">na.rm =</span> T)})</span>
+<span id="cb203-21"><a href="analysis.html#cb203-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># indicating extremum values</span></span>
+<span id="cb203-22"><a href="analysis.html#cb203-22" aria-hidden="true" tabindex="-1"></a>  cols_to_compare <span class="ot">&lt;-</span> <span class="fu">colnames</span>(wmy_t_w)[<span class="sc">!</span><span class="fu">colnames</span>(wmy_t_w) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;chi_adj&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;independence&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>, <span class="st">&quot;variable&quot;</span>)]</span>
+<span id="cb203-23"><a href="analysis.html#cb203-23" aria-hidden="true" tabindex="-1"></a>  wmy_t_w<span class="sc">$</span>max <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(wmy_t_w<span class="sc">$</span>independence <span class="sc">==</span> <span class="st">&quot;h1&quot;</span>, cols_to_compare[<span class="fu">apply</span>(wmy_t_w, <span class="dv">1</span>, which.max)], <span class="dv">0</span>)</span>
+<span id="cb203-24"><a href="analysis.html#cb203-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb203-25"><a href="analysis.html#cb203-25" aria-hidden="true" tabindex="-1"></a>  wmy_t_w<span class="sc">$</span>min <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(wmy_t_w<span class="sc">$</span>independence <span class="sc">==</span> <span class="st">&quot;h1&quot;</span>, cols_to_compare[<span class="fu">apply</span>(wmy_t_w, <span class="dv">1</span>, which.min)], <span class="dv">0</span>)</span>
+<span id="cb203-26"><a href="analysis.html#cb203-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb203-27"><a href="analysis.html#cb203-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#adding Overall value to the table</span></span>
+<span id="cb203-28"><a href="analysis.html#cb203-28" aria-hidden="true" tabindex="-1"></a>  ovl_tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">prop.table</span>(<span class="fu">svytable</span>(<span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;~&quot;</span>,x)), design)))</span>
+<span id="cb203-29"><a href="analysis.html#cb203-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(ovl_tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;options&quot;</span>, <span class="st">&quot;overall&quot;</span>)</span>
+<span id="cb203-30"><a href="analysis.html#cb203-30" aria-hidden="true" tabindex="-1"></a>  wmy_t_w <span class="ot">&lt;-</span> wmy_t_w <span class="sc">%&gt;%</span> <span class="fu">bind_cols</span>(ovl_tab)</span>
+<span id="cb203-31"><a href="analysis.html#cb203-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(wmy_t_w)</span>
+<span id="cb203-32"><a href="analysis.html#cb203-32" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The use with a single-choice question</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="analysis.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chi2_ind_extr</span>(<span class="st">&quot;f11_dinking_water_source&quot;</span>, <span class="st">&quot;strata&quot;</span>, svy_design)</span></code></pre></div>
+<pre><code>##                                                                                 variable
+## 1                      f11_dinking_water_source bottled_water_water_purchased_in_bottles
+## 2 f11_dinking_water_source drinking_water_from_water_kiosk_booth_with_water_for_bottling
+## 3                                                 f11_dinking_water_source other_specify
+## 4                                                 f11_dinking_water_source personal_well
+## 5                        f11_dinking_water_source public_well_or_boreholes_shared_access
+## 6                   f11_dinking_water_source tap_drinking_water_centralized_water_supply
+## 7                                         f11_dinking_water_source technical_piped_water
+## 8                        f11_dinking_water_source trucked_in_water_truck_with_a_tank_etc
+##              p  chi_adj df independence 20km_rural 20km_urban   5km_rural
+## 1 9.386389e-50 244.6205 21           h1 0.02457002 0.07673267 0.034825871
+## 2 9.386389e-50 244.6205 21           h1 0.19901720 0.29950495 0.131840796
+## 3 9.386389e-50 244.6205 21           h1 0.01228501 0.00000000 0.007462687
+## 4 9.386389e-50 244.6205 21           h1 0.32432432 0.09653465 0.482587065
+## 5 9.386389e-50 244.6205 21           h1 0.15724816 0.05445545 0.151741294
+## 6 9.386389e-50 244.6205 21           h1 0.22358722 0.43316832 0.144278607
+## 7 9.386389e-50 244.6205 21           h1 0.00000000 0.00000000 0.000000000
+## 8 9.386389e-50 244.6205 21           h1 0.05896806 0.03960396 0.047263682
+##     5km_urban       max        min
+## 1 0.032178218 5km_rural 20km_urban
+## 2 0.274752475 5km_rural 20km_urban
+## 3 0.007425743 5km_rural       &lt;NA&gt;
+## 4 0.121287129 5km_rural 20km_urban
+## 5 0.099009901 5km_rural 20km_urban
+## 6 0.383663366 5km_rural 20km_urban
+## 7 0.004950495 5km_rural       &lt;NA&gt;
+## 8 0.076732673 5km_rural 20km_urban
+##                                                         options     overall
+## 1                      bottled_water_water_purchased_in_bottles 0.049170548
+## 2 drinking_water_from_water_kiosk_booth_with_water_for_bottling 0.263132750
+## 3                                                 other_specify 0.005188695
+## 4                                                 personal_well 0.167758525
+## 5                        public_well_or_boreholes_shared_access 0.093728457
+## 6                   tap_drinking_water_centralized_water_supply 0.362248561
+## 7                                         technical_piped_water 0.001836837
+## 8                        trucked_in_water_truck_with_a_tank_etc 0.056935627</code></pre>
+<p>In the given output, <strong>p</strong> indicates chi-squared test p-value, <strong>chi_adj</strong> - value of chi-squared parameter, <strong>df</strong> - degrees of freedom, <strong>independence</strong> - indicates which hypothesis is accepted, h0 or h1. In the current function, H1 is accepted if p &lt; 0.05. In case H0 is rejected and H1 accepted, in <strong>min</strong> and <strong>max</strong> columns minimum and maximum y variable categories are given.</p>
+<p>The use with a multiple-choice question.</p>
+<p>The test would not work if any of dummies consists from zeros only, it need to be checked in advance, thus, let’s filter such variables out from the vector of variable names</p>
+<p>Getting full range of dummies from the question</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="analysis.html#cb206-1" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">names</span>(main_dataset)</span>
+<span id="cb206-2"><a href="analysis.html#cb206-2" aria-hidden="true" tabindex="-1"></a>f12 <span class="ot">&lt;-</span> names[<span class="fu">grepl</span>(<span class="st">&quot;f12_drinking_water_treat.&quot;</span>, names)]</span></code></pre></div>
+<p>Defining a function which would remove zero-sum variables for us</p>
+<p>if the absence of empty cells for each strata is needed, per_cell = T</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="analysis.html#cb207-1" aria-hidden="true" tabindex="-1"></a>non_zero_for_test <span class="ot">&lt;-</span> <span class="cf">function</span>(var, strata, dataset, <span class="at">per_cell =</span> F){</span>
+<span id="cb207-2"><a href="analysis.html#cb207-2" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sapply</span>(dataset[, <span class="fu">names</span>(dataset) <span class="sc">%in%</span> var], sum))</span>
+<span id="cb207-3"><a href="analysis.html#cb207-3" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(sum), sum)</span>
+<span id="cb207-4"><a href="analysis.html#cb207-4" aria-hidden="true" tabindex="-1"></a>  filtered <span class="ot">&lt;-</span> sum[sum[,<span class="dv">2</span>] <span class="sc">&gt;</span> <span class="dv">0</span>,<span class="dv">1</span>]</span>
+<span id="cb207-5"><a href="analysis.html#cb207-5" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sapply</span>(dataset[,<span class="fu">names</span>(dataset) <span class="sc">%in%</span> filtered], table, dataset[, strata]))</span>
+<span id="cb207-6"><a href="analysis.html#cb207-6" aria-hidden="true" tabindex="-1"></a>  ntab <span class="ot">&lt;-</span> <span class="fu">names</span>(tab)</span>
+<span id="cb207-7"><a href="analysis.html#cb207-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#if the absence of empty cells for each strata is needed, per_cell = T</span></span>
+<span id="cb207-8"><a href="analysis.html#cb207-8" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> tab[, <span class="fu">which</span>(<span class="fu">colnames</span>(tab) <span class="sc">%in%</span> ntab)]</span>
+<span id="cb207-9"><a href="analysis.html#cb207-9" aria-hidden="true" tabindex="-1"></a>  zeros <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">apply</span>(tab, <span class="dv">2</span>, <span class="cf">function</span>(x) x<span class="sc">==</span><span class="dv">0</span>), <span class="dv">2</span>, any)</span>
+<span id="cb207-10"><a href="analysis.html#cb207-10" aria-hidden="true" tabindex="-1"></a>  zeros <span class="ot">&lt;-</span> zeros[zeros <span class="sc">==</span> F]</span>
+<span id="cb207-11"><a href="analysis.html#cb207-11" aria-hidden="true" tabindex="-1"></a>  zeros <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(zeros)</span>
+<span id="cb207-12"><a href="analysis.html#cb207-12" aria-hidden="true" tabindex="-1"></a>  zeros <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(zeros), zeros)</span>
+<span id="cb207-13"><a href="analysis.html#cb207-13" aria-hidden="true" tabindex="-1"></a>  zeros_lab <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(zeros[,<span class="dv">1</span>], <span class="at">split =</span> <span class="st">&quot;.Freq&quot;</span>)))</span>
+<span id="cb207-14"><a href="analysis.html#cb207-14" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb207-15"><a href="analysis.html#cb207-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(per_cell <span class="sc">==</span> T){</span>
+<span id="cb207-16"><a href="analysis.html#cb207-16" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> zeros_lab</span>
+<span id="cb207-17"><a href="analysis.html#cb207-17" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb207-18"><a href="analysis.html#cb207-18" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> ntab</span>
+<span id="cb207-19"><a href="analysis.html#cb207-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb207-20"><a href="analysis.html#cb207-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="fu">paste0</span>(<span class="fu">abs</span>(<span class="fu">length</span>(var) <span class="sc">-</span> <span class="fu">length</span>(result)), <span class="st">&quot; variables were removed because of containing zeros in stratas&quot;</span>))</span>
+<span id="cb207-21"><a href="analysis.html#cb207-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb207-22"><a href="analysis.html#cb207-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb207-23"><a href="analysis.html#cb207-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Using the test with multiple choice question.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="analysis.html#cb208-1" aria-hidden="true" tabindex="-1"></a>nz_f12 <span class="ot">&lt;-</span> <span class="fu">non_zero_for_test</span>(f12, <span class="st">&quot;strata&quot;</span>, main_dataset, <span class="at">per_cell =</span> F)</span></code></pre></div>
+<pre><code>## 2 variables were removed because of containing zeros in stratas</code></pre>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="analysis.html#cb210-1" aria-hidden="true" tabindex="-1"></a>f12_sig <span class="ot">&lt;-</span> <span class="fu">lapply</span>(nz_f12, chi2_ind_extr, <span class="at">y =</span> <span class="st">&quot;strata&quot;</span>, <span class="at">design =</span> svy_design)</span>
+<span id="cb210-2"><a href="analysis.html#cb210-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-3"><a href="analysis.html#cb210-3" aria-hidden="true" tabindex="-1"></a>f12_sig_df <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(rbind, f12_sig)</span>
+<span id="cb210-4"><a href="analysis.html#cb210-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-5"><a href="analysis.html#cb210-5" aria-hidden="true" tabindex="-1"></a><span class="co">#removing 0 (&quot;not selected&quot;) options</span></span>
+<span id="cb210-6"><a href="analysis.html#cb210-6" aria-hidden="true" tabindex="-1"></a>f12_sig_df <span class="ot">&lt;-</span> f12_sig_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(options <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb210-7"><a href="analysis.html#cb210-7" aria-hidden="true" tabindex="-1"></a>f12_sig_df</span></code></pre></div>
+<pre><code>##                                                                variable
+## 1       f12_drinking_water_treat.cleaning_with_chemicals_chlorination 1
+## 2                        f12_drinking_water_treat.water_precipitation 1
+## 3         f12_drinking_water_treat.filtering_the_water_pitcher_filter 1
+## 4 f12_drinking_water_treat.filtering_the_water_reverse_osmosis_filter 1
+## 5                                    f12_drinking_water_treat.boiling 1
+## 6                                f12_drinking_water_treat.percolation 1
+## 7                              f12_drinking_water_treat.other_specify 1
+## 8                      f12_drinking_water_treat.do_not_process_purify 1
+##            p  chi_adj df independence  20km_rural  20km_urban   5km_rural
+## 1 0.03100696 4.780006  3           h1 0.000000000 0.004950495 0.000000000
+## 2 0.02775288 7.977278  3           h1 0.073710074 0.126237624 0.104477612
+## 3 0.55635016 1.828231  3           h0 0.046683047 0.069306931 0.059701493
+## 4 0.44029529 2.347539  3           h0 0.027027027 0.037128713 0.017412935
+## 5 0.02724163 8.191084  3           h1 0.260442260 0.274752475 0.223880597
+## 6 0.24801653 3.459406  3           h0 0.004914005 0.002475248 0.007462687
+## 7 0.28029092 2.860754  3           h0 0.004914005 0.002475248 0.000000000
+## 8 0.01762880 9.011919  3           h1 0.624078624 0.551980198 0.674129353
+##    5km_urban       max        min options     overall
+## 1 0.00000000 5km_rural       &lt;NA&gt;       1 0.002000313
+## 2 0.14108911 5km_rural 20km_urban       1 0.122036605
+## 3 0.06930693         0          0       1 0.065108190
+## 4 0.04207921         0          0       1 0.036036995
+## 5 0.20792079 5km_rural 20km_urban       1 0.244239386
+## 6 0.00000000         0          0       1 0.002279393
+## 7 0.00000000         0          0       1 0.001769625
+## 8 0.60643564 5km_rural 20km_urban       1 0.591818943</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>The function without the survey design object</li>
+</ol>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="analysis.html#cb212-1" aria-hidden="true" tabindex="-1"></a>chi2_ind_wtd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, weight, dataset){</span>
+<span id="cb212-2"><a href="analysis.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb212-3"><a href="analysis.html#cb212-3" aria-hidden="true" tabindex="-1"></a>  table_new <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb212-4"><a href="analysis.html#cb212-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)) {</span>
+<span id="cb212-5"><a href="analysis.html#cb212-5" aria-hidden="true" tabindex="-1"></a>  ni <span class="ot">&lt;-</span> x[i]</span>
+<span id="cb212-6"><a href="analysis.html#cb212-6" aria-hidden="true" tabindex="-1"></a>  ti <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb212-7"><a href="analysis.html#cb212-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(y))) <span class="sc">%&gt;%</span></span>
+<span id="cb212-8"><a href="analysis.html#cb212-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(y), <span class="sc">!!</span><span class="fu">sym</span>(ni)) <span class="sc">%&gt;%</span> </span>
+<span id="cb212-9"><a href="analysis.html#cb212-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(ni))) <span class="sc">%&gt;%</span></span>
+<span id="cb212-10"><a href="analysis.html#cb212-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">wtn =</span> <span class="fu">sum</span>(<span class="sc">!!</span><span class="fu">sym</span>(weight)), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb212-11"><a href="analysis.html#cb212-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">prop =</span> wtn<span class="sc">/</span><span class="fu">sum</span>(wtn), <span class="at">varnam =</span> ni)</span>
+<span id="cb212-12"><a href="analysis.html#cb212-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(ti) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;var_ind&quot;</span>, <span class="st">&quot;var_dep_val&quot;</span>, <span class="st">&quot;wtn&quot;</span>, <span class="st">&quot;n&quot;</span>,  <span class="st">&quot;prop&quot;</span>, <span class="st">&quot;dep_var_nam&quot;</span>)</span>
+<span id="cb212-13"><a href="analysis.html#cb212-13" aria-hidden="true" tabindex="-1"></a>  ti <span class="ot">&lt;-</span> ti <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">base =</span> <span class="fu">sum</span>(<span class="fu">c_across</span>(n)))</span>
+<span id="cb212-14"><a href="analysis.html#cb212-14" aria-hidden="true" tabindex="-1"></a>  chi_test  <span class="ot">&lt;-</span> <span class="fu">wtd.chi.sq</span>(<span class="at">var1 =</span> dataset[, <span class="fu">paste0</span>(y)], <span class="at">var2 =</span> dataset[, <span class="fu">paste0</span>(ni)], <span class="at">weight =</span> dataset[, <span class="fu">paste0</span>(weight)])</span>
+<span id="cb212-15"><a href="analysis.html#cb212-15" aria-hidden="true" tabindex="-1"></a>  ti<span class="sc">$</span>chisq <span class="ot">&lt;-</span> chi_test[<span class="dv">1</span>]</span>
+<span id="cb212-16"><a href="analysis.html#cb212-16" aria-hidden="true" tabindex="-1"></a>  ti<span class="sc">$</span>df <span class="ot">&lt;-</span> chi_test[<span class="dv">2</span>]</span>
+<span id="cb212-17"><a href="analysis.html#cb212-17" aria-hidden="true" tabindex="-1"></a>  ti<span class="sc">$</span>p <span class="ot">&lt;-</span> chi_test[<span class="dv">3</span>]</span>
+<span id="cb212-18"><a href="analysis.html#cb212-18" aria-hidden="true" tabindex="-1"></a>  ti<span class="sc">$</span>hypo <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ti<span class="sc">$</span>p <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">&quot;h1&quot;</span>, <span class="st">&quot;h0&quot;</span>)</span>
+<span id="cb212-19"><a href="analysis.html#cb212-19" aria-hidden="true" tabindex="-1"></a>  table_new <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table_new, ti)</span>
+<span id="cb212-20"><a href="analysis.html#cb212-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb212-21"><a href="analysis.html#cb212-21" aria-hidden="true" tabindex="-1"></a>table_cl_new_1 <span class="ot">&lt;-</span> table_new <span class="sc">%&gt;%</span> </span>
+<span id="cb212-22"><a href="analysis.html#cb212-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter(var_dep_val != &quot;0&quot;) %&gt;% </span></span>
+<span id="cb212-23"><a href="analysis.html#cb212-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(var_dep_val))</span>
+<span id="cb212-24"><a href="analysis.html#cb212-24" aria-hidden="true" tabindex="-1"></a><span class="co">#mutate(var_id = paste0(dep_var_nam, &quot;.&quot;, var_dep_val))</span></span>
+<span id="cb212-25"><a href="analysis.html#cb212-25" aria-hidden="true" tabindex="-1"></a>table_cl_new_1 <span class="ot">&lt;-</span> table_cl_new_1[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)]</span>
+<span id="cb212-26"><a href="analysis.html#cb212-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-27"><a href="analysis.html#cb212-27" aria-hidden="true" tabindex="-1"></a>table_sprd <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">spread</span>(table_cl_new_1, var_ind, prop) <span class="sc">%&gt;%</span></span>
+<span id="cb212-28"><a href="analysis.html#cb212-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_var_nam)</span>
+<span id="cb212-29"><a href="analysis.html#cb212-29" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(table_sprd)</span>
+<span id="cb212-30"><a href="analysis.html#cb212-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The use with the single choice question</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="analysis.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chi2_ind_wtd</span>(<span class="at">x =</span> <span class="st">&quot;f11_dinking_water_source&quot;</span>, <span class="at">y =</span> <span class="st">&quot;strata&quot;</span>,</span>
+<span id="cb213-2"><a href="analysis.html#cb213-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">weight =</span> <span class="st">&quot;stratum.weight&quot;</span>, main_dataset)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;strata&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 8 × 11
+##   var_dep_val          dep_var_nam  base chisq    df        p hypo  `20km_rural`
+##   &lt;chr&gt;                &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+## 1 bottled_water_water… f11_dinkin…  1617  245.    21 4.93e-40 h1          0.0246
+## 2 drinking_water_from… f11_dinkin…  1617  245.    21 4.93e-40 h1          0.199 
+## 3 other_specify        f11_dinkin…  1617  245.    21 4.93e-40 h1          0.0123
+## 4 personal_well        f11_dinkin…  1617  245.    21 4.93e-40 h1          0.324 
+## 5 public_well_or_bore… f11_dinkin…  1617  245.    21 4.93e-40 h1          0.157 
+## 6 tap_drinking_water_… f11_dinkin…  1617  245.    21 4.93e-40 h1          0.224 
+## 7 technical_piped_wat… f11_dinkin…  1617  245.    21 4.93e-40 h1         NA     
+## 8 trucked_in_water_tr… f11_dinkin…  1617  245.    21 4.93e-40 h1          0.0590
+## # … with 3 more variables: `20km_urban` &lt;dbl&gt;, `5km_rural` &lt;dbl&gt;,
+## #   `5km_urban` &lt;dbl&gt;</code></pre>
+<p>The use with multiple choice questions</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="analysis.html#cb216-1" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">names</span>(main_dataset)</span>
+<span id="cb216-2"><a href="analysis.html#cb216-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb216-3"><a href="analysis.html#cb216-3" aria-hidden="true" tabindex="-1"></a>f12_names <span class="ot">&lt;-</span> names[<span class="fu">grepl</span>(<span class="st">&quot;f12_drinking_water_treat.&quot;</span>, names)]</span>
+<span id="cb216-4"><a href="analysis.html#cb216-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb216-5"><a href="analysis.html#cb216-5" aria-hidden="true" tabindex="-1"></a>f12_sig2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(f12_names, chi2_ind_wtd, <span class="at">y =</span> <span class="st">&quot;strata&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;stratum.weight&quot;</span>, main_dataset)</span>
+<span id="cb216-6"><a href="analysis.html#cb216-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb216-7"><a href="analysis.html#cb216-7" aria-hidden="true" tabindex="-1"></a>f12_tab_df <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(rbind, f12_sig2)</span>
+<span id="cb216-8"><a href="analysis.html#cb216-8" aria-hidden="true" tabindex="-1"></a>f12_tab_df</span></code></pre></div>
+<pre><code>## # A tibble: 18 × 11
+##    var_dep_val dep_var_nam            base chisq    df      p hypo  `20km_rural`
+##          &lt;int&gt; &lt;chr&gt;                 &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+##  1           0 f12_drinking_water_t…  1617  4.78     3 0.189  h0         1      
+##  2           1 f12_drinking_water_t…  1617  4.78     3 0.189  h0        NA      
+##  3           0 f12_drinking_water_t…  1617  7.98     3 0.0465 h1         0.926  
+##  4           1 f12_drinking_water_t…  1617  7.98     3 0.0465 h1         0.0737 
+##  5           0 f12_drinking_water_t…  1617  1.83     3 0.609  h0         0.953  
+##  6           1 f12_drinking_water_t…  1617  1.83     3 0.609  h0         0.0467 
+##  7           0 f12_drinking_water_t…  1617  2.35     3 0.503  h0         0.973  
+##  8           1 f12_drinking_water_t…  1617  2.35     3 0.503  h0         0.0270 
+##  9           0 f12_drinking_water_t…  1617  8.19     3 0.0422 h1         0.740  
+## 10           1 f12_drinking_water_t…  1617  8.19     3 0.0422 h1         0.260  
+## 11           0 f12_drinking_water_t…  1617  3.46     3 0.326  h0         0.995  
+## 12           1 f12_drinking_water_t…  1617  3.46     3 0.326  h0         0.00491
+## 13           0 f12_drinking_water_t…  1617  2.86     3 0.414  h0         0.995  
+## 14           1 f12_drinking_water_t…  1617  2.86     3 0.414  h0         0.00491
+## 15           0 f12_drinking_water_t…  1617  0        0 1      h0         1      
+## 16           0 f12_drinking_water_t…  1617  0        0 1      h0         1      
+## 17           0 f12_drinking_water_t…  1617  9.01     3 0.0291 h1         0.376  
+## 18           1 f12_drinking_water_t…  1617  9.01     3 0.0291 h1         0.624  
+## # … with 3 more variables: `20km_urban` &lt;dbl&gt;, `5km_rural` &lt;dbl&gt;,
+## #   `5km_urban` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="chi-squared-goodness-of-fit-test" class="section level3 hasAnchor" number="7.8.4">
+<h3><span class="header-section-number">7.8.4</span> Chi-squared Goodness of Fit test<a href="analysis.html#chi-squared-goodness-of-fit-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Goodness of test chi-squared test is used to compare the observed distribution with the hypothetical one,</p>
+<p>For instance, we would like to test the hypothesis, that 90% of HHs had soap in their HHs at the moment of the survey.</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="analysis.html#cb218-1" aria-hidden="true" tabindex="-1"></a>main_dataset <span class="ot">&lt;-</span> main_dataset <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">soap =</span> <span class="fu">case_when</span>(</span>
+<span id="cb218-2"><a href="analysis.html#cb218-2" aria-hidden="true" tabindex="-1"></a> p16_soap_household <span class="sc">==</span> <span class="st">&quot;dont_know_refuse_to_answer&quot;</span> <span class="sc">~</span> <span class="st">&quot;NA&quot;</span>,</span>
+<span id="cb218-3"><a href="analysis.html#cb218-3" aria-hidden="true" tabindex="-1"></a> p16_soap_household <span class="sc">==</span> <span class="st">&quot;no&quot;</span> <span class="sc">~</span> <span class="st">&quot;no&quot;</span>,</span>
+<span id="cb218-4"><a href="analysis.html#cb218-4" aria-hidden="true" tabindex="-1"></a> p16_soap_household <span class="sc">==</span> <span class="st">&quot;yes_soap_is_not_shown&quot;</span> <span class="sc">~</span> <span class="st">&quot;yes&quot;</span>,</span>
+<span id="cb218-5"><a href="analysis.html#cb218-5" aria-hidden="true" tabindex="-1"></a> p16_soap_household <span class="sc">==</span> <span class="st">&quot;yes_soap_is_shown&quot;</span> <span class="sc">~</span> <span class="st">&quot;yes&quot;</span></span>
+<span id="cb218-6"><a href="analysis.html#cb218-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb218-7"><a href="analysis.html#cb218-7" aria-hidden="true" tabindex="-1"></a>soap_prob <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(main_dataset<span class="sc">$</span>soap)))</span>
+<span id="cb218-8"><a href="analysis.html#cb218-8" aria-hidden="true" tabindex="-1"></a>soap_prob <span class="ot">&lt;-</span> soap_prob[, <span class="dv">2</span>]</span>
+<span id="cb218-9"><a href="analysis.html#cb218-9" aria-hidden="true" tabindex="-1"></a><span class="co"># please, note that this is a function call with unweighted data!</span></span>
+<span id="cb218-10"><a href="analysis.html#cb218-10" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(soap_prob, <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.9</span>))</span></code></pre></div>
+<pre><code>## Warning in chisq.test(soap_prob, p = c(0, 0.1, 0.9)): Chi-squared approximation
+## may be incorrect</code></pre>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  soap_prob
+## X-squared = Inf, df = 2, p-value &lt; 2.2e-16</code></pre>
+<p>As p value is lower than the chosen confidence level, hypothesis of equality of the current distribution to hypothetical 90% / 10% of soap-owners can be rejected.</p>
+<p>Defining a function for checking the distribution within a particular group, against the “hypothetical” overall sample.</p>
+<p>For the overall sample we would need a variable which has the same value across all observations (e.g. informed consent == yes etc.)</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="analysis.html#cb221-1" aria-hidden="true" tabindex="-1"></a>chi2_GoF <span class="ot">&lt;-</span> <span class="cf">function</span>(name, stratum_hyp, stratum_2, value_stratum_hyp, value_stratum_2, data, weights){</span>
+<span id="cb221-2"><a href="analysis.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb221-3"><a href="analysis.html#cb221-3" aria-hidden="true" tabindex="-1"></a>  table_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb221-4"><a href="analysis.html#cb221-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(name)) {</span>
+<span id="cb221-5"><a href="analysis.html#cb221-5" aria-hidden="true" tabindex="-1"></a>    ni <span class="ot">&lt;-</span> name[i]</span>
+<span id="cb221-6"><a href="analysis.html#cb221-6" aria-hidden="true" tabindex="-1"></a>    ti <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb221-7"><a href="analysis.html#cb221-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(ni)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!!</span><span class="fu">sym</span>(stratum_hyp) <span class="sc">==</span> <span class="fu">paste0</span>(value_stratum_hyp)) <span class="sc">%&gt;%</span></span>
+<span id="cb221-8"><a href="analysis.html#cb221-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(ni))) <span class="sc">%&gt;%</span></span>
+<span id="cb221-9"><a href="analysis.html#cb221-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">wtn =</span> <span class="fu">sum</span>(<span class="sc">!!</span><span class="fu">sym</span>(weights)), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb221-10"><a href="analysis.html#cb221-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">prop =</span> wtn<span class="sc">/</span><span class="fu">sum</span>(wtn), <span class="at">base =</span> <span class="fu">sum</span>(wtn), <span class="at">cnt =</span> <span class="fu">sum</span>(n))<span class="sc">%&gt;%</span></span>
+<span id="cb221-11"><a href="analysis.html#cb221-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">varnam =</span> ni)</span>
+<span id="cb221-12"><a href="analysis.html#cb221-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(ti) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>, <span class="st">&quot;wtn&quot;</span>, <span class="st">&quot;n&quot;</span>, <span class="st">&quot;prop&quot;</span>, <span class="st">&quot;base_w&quot;</span>, <span class="st">&quot;count&quot;</span>, <span class="st">&quot;nam&quot;</span>)</span>
+<span id="cb221-13"><a href="analysis.html#cb221-13" aria-hidden="true" tabindex="-1"></a>    table_1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table_1, ti)</span>
+<span id="cb221-14"><a href="analysis.html#cb221-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb221-15"><a href="analysis.html#cb221-15" aria-hidden="true" tabindex="-1"></a>  table_cl_1 <span class="ot">&lt;-</span> table_1 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(var)) <span class="sc">%&gt;%</span></span>
+<span id="cb221-16"><a href="analysis.html#cb221-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">var_id =</span> <span class="fu">paste0</span>(nam, <span class="st">&quot;.&quot;</span>, var))</span>
+<span id="cb221-17"><a href="analysis.html#cb221-17" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb221-18"><a href="analysis.html#cb221-18" aria-hidden="true" tabindex="-1"></a>  table_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb221-19"><a href="analysis.html#cb221-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(name)) {</span>
+<span id="cb221-20"><a href="analysis.html#cb221-20" aria-hidden="true" tabindex="-1"></a>    ni <span class="ot">&lt;-</span> name[i]</span>
+<span id="cb221-21"><a href="analysis.html#cb221-21" aria-hidden="true" tabindex="-1"></a>    ti <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb221-22"><a href="analysis.html#cb221-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(ni)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!!</span><span class="fu">sym</span>(stratum_2) <span class="sc">==</span> <span class="fu">paste0</span>(value_stratum_2)) <span class="sc">%&gt;%</span></span>
+<span id="cb221-23"><a href="analysis.html#cb221-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(ni))) <span class="sc">%&gt;%</span></span>
+<span id="cb221-24"><a href="analysis.html#cb221-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">wtn =</span> <span class="fu">sum</span>(<span class="sc">!!</span><span class="fu">sym</span>(weights)), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb221-25"><a href="analysis.html#cb221-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">prop =</span> wtn<span class="sc">/</span><span class="fu">sum</span>(wtn), <span class="at">base =</span> <span class="fu">sum</span>(wtn), <span class="at">cnt =</span> <span class="fu">sum</span>(n))<span class="sc">%&gt;%</span></span>
+<span id="cb221-26"><a href="analysis.html#cb221-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">varnam =</span> ni)</span>
+<span id="cb221-27"><a href="analysis.html#cb221-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(ti) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>, <span class="st">&quot;wtn&quot;</span>, <span class="st">&quot;n&quot;</span>, <span class="st">&quot;prop&quot;</span>, <span class="st">&quot;base_w&quot;</span>, <span class="st">&quot;count&quot;</span>, <span class="st">&quot;nam&quot;</span>)</span>
+<span id="cb221-28"><a href="analysis.html#cb221-28" aria-hidden="true" tabindex="-1"></a>    table_2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table_2, ti)</span>
+<span id="cb221-29"><a href="analysis.html#cb221-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb221-30"><a href="analysis.html#cb221-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-31"><a href="analysis.html#cb221-31" aria-hidden="true" tabindex="-1"></a>  table_cl_2 <span class="ot">&lt;-</span> table_2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(var)) <span class="sc">%&gt;%</span></span>
+<span id="cb221-32"><a href="analysis.html#cb221-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">var_id =</span> <span class="fu">paste0</span>(nam, <span class="st">&quot;.&quot;</span>, var))</span>
+<span id="cb221-33"><a href="analysis.html#cb221-33" aria-hidden="true" tabindex="-1"></a>  table_cl_compare <span class="ot">&lt;-</span> <span class="fu">merge</span>(table_cl_1, table_cl_2, <span class="at">by =</span> <span class="st">&quot;var_id&quot;</span>, <span class="at">all =</span> T)</span>
+<span id="cb221-34"><a href="analysis.html#cb221-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(table_cl_compare) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;var.id&quot;</span>, <span class="st">&quot;var.hyp&quot;</span>, <span class="st">&quot;wtn.hyp&quot;</span>, <span class="st">&quot;n.hyp&quot;</span>, <span class="st">&quot;prop.hyp&quot;</span>, <span class="st">&quot;base.hyp&quot;</span>, <span class="st">&quot;base_nw.hyp&quot;</span>,<span class="st">&quot;nam.hyp&quot;</span>, <span class="st">&quot;var.2&quot;</span>, <span class="st">&quot;wtn.2&quot;</span>, <span class="st">&quot;n.2&quot;</span>, <span class="st">&quot;prop.2&quot;</span>, <span class="st">&quot;base.2&quot;</span>, <span class="st">&quot;base_nw.2&quot;</span>, <span class="st">&quot;nam.2&quot;</span>)</span>
+<span id="cb221-35"><a href="analysis.html#cb221-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-36"><a href="analysis.html#cb221-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Dealing with NA issues</span></span>
+<span id="cb221-37"><a href="analysis.html#cb221-37" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>nam.hyp[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>nam.hyp)] <span class="ot">&lt;-</span> table_cl_compare<span class="sc">$</span>nam<span class="fl">.2</span>[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>nam.hyp)]</span>
+<span id="cb221-38"><a href="analysis.html#cb221-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-39"><a href="analysis.html#cb221-39" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>nam<span class="fl">.2</span>[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>nam<span class="fl">.2</span>)] <span class="ot">&lt;-</span> table_cl_compare<span class="sc">$</span>nam.hyp[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>nam<span class="fl">.2</span>)]</span>
+<span id="cb221-40"><a href="analysis.html#cb221-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-41"><a href="analysis.html#cb221-41" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>to_split <span class="ot">&lt;-</span> table_cl_compare<span class="sc">$</span>nam.hyp</span>
+<span id="cb221-42"><a href="analysis.html#cb221-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-43"><a href="analysis.html#cb221-43" aria-hidden="true" tabindex="-1"></a>  table_cl_compare <span class="ot">&lt;-</span> <span class="fu">separate</span>(table_cl_compare, <span class="at">col =</span> to_split, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;indctr&quot;</span>, <span class="st">&quot;item&quot;</span>), <span class="at">sep =</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>)</span>
+<span id="cb221-44"><a href="analysis.html#cb221-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-45"><a href="analysis.html#cb221-45" aria-hidden="true" tabindex="-1"></a>  table_cl_compare <span class="ot">&lt;-</span> table_cl_compare <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(indctr) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base_nw.hyp, <span class="at">.direction  =</span> <span class="st">&quot;down&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base_nw.hyp, <span class="at">.direction  =</span> <span class="st">&quot;up&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span>
+<span id="cb221-46"><a href="analysis.html#cb221-46" aria-hidden="true" tabindex="-1"></a>  table_cl_compare <span class="ot">&lt;-</span> table_cl_compare <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(indctr) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base.hyp, <span class="at">.direction  =</span> <span class="st">&quot;down&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base.hyp, <span class="at">.direction  =</span> <span class="st">&quot;up&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span>
+<span id="cb221-47"><a href="analysis.html#cb221-47" aria-hidden="true" tabindex="-1"></a>  table_cl_compare <span class="ot">&lt;-</span> table_cl_compare <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(indctr) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base_nw<span class="fl">.2</span>, <span class="at">.direction  =</span> <span class="st">&quot;down&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base_nw<span class="fl">.2</span>, <span class="at">.direction  =</span> <span class="st">&quot;up&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span>
+<span id="cb221-48"><a href="analysis.html#cb221-48" aria-hidden="true" tabindex="-1"></a>  table_cl_compare <span class="ot">&lt;-</span> table_cl_compare <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(indctr) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base_nw.hyp, <span class="at">.direction  =</span> <span class="st">&quot;down&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fill</span>(base<span class="fl">.2</span>, <span class="at">.direction  =</span> <span class="st">&quot;up&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span>
+<span id="cb221-49"><a href="analysis.html#cb221-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-50"><a href="analysis.html#cb221-50" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>prop.hyp[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>prop.hyp)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb221-51"><a href="analysis.html#cb221-51" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>prop<span class="fl">.2</span>[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>prop<span class="fl">.2</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb221-52"><a href="analysis.html#cb221-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-53"><a href="analysis.html#cb221-53" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>wtn.hyp[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>wtn.hyp)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb221-54"><a href="analysis.html#cb221-54" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>wtn<span class="fl">.2</span>[<span class="fu">is.na</span>(table_cl_compare<span class="sc">$</span>wtn<span class="fl">.2</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb221-55"><a href="analysis.html#cb221-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-56"><a href="analysis.html#cb221-56" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>chi2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(table_cl_compare<span class="sc">$</span>wtn<span class="fl">.2</span>, <span class="at">p =</span> table_cl_compare<span class="sc">$</span>prop.hyp)<span class="sc">$</span>statistic</span>
+<span id="cb221-57"><a href="analysis.html#cb221-57" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>p <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(table_cl_compare<span class="sc">$</span>wtn<span class="fl">.2</span>, <span class="at">p =</span> table_cl_compare<span class="sc">$</span>prop.hyp)<span class="sc">$</span>p.value</span>
+<span id="cb221-58"><a href="analysis.html#cb221-58" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>df <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(table_cl_compare<span class="sc">$</span>wtn<span class="fl">.2</span>, <span class="at">p =</span> table_cl_compare<span class="sc">$</span>prop.hyp)<span class="sc">$</span>df</span>
+<span id="cb221-59"><a href="analysis.html#cb221-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb221-60"><a href="analysis.html#cb221-60" aria-hidden="true" tabindex="-1"></a>  table_cl_compare<span class="sc">$</span>H0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(table_cl_compare<span class="sc">$</span>p <span class="sc">&lt;=</span> <span class="fl">0.05</span>, <span class="st">&quot;H1 - different&quot;</span>, <span class="st">&quot;H0 - same&quot;</span>)</span>
+<span id="cb221-61"><a href="analysis.html#cb221-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(table_cl_compare)</span>
+<span id="cb221-62"><a href="analysis.html#cb221-62" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Using the function with a single choice question</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="analysis.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chi2_GoF</span>(<span class="at">name =</span> <span class="st">&quot;f11_dinking_water_source&quot;</span>, <span class="at">stratum_hyp =</span> <span class="st">&quot;a1_informed_consent&quot;</span>, <span class="at">stratum_2 =</span> <span class="st">&quot;strata&quot;</span>, <span class="at">value_stratum_hyp =</span> <span class="st">&quot;yes&quot;</span>, <span class="at">value_stratum_2 =</span> <span class="st">&quot;5km_rural&quot;</span>, <span class="at">data =</span> main_dataset, <span class="at">weights =</span> <span class="st">&quot;stratum.weight&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 8 rows [1, 2, 3,
+## 4, 5, 6, 7, 8].</code></pre>
+<pre><code>## Warning in chisq.test(table_cl_compare$wtn.2, p = table_cl_compare$prop.hyp):
+## Chi-squared approximation may be incorrect
+
+## Warning in chisq.test(table_cl_compare$wtn.2, p = table_cl_compare$prop.hyp):
+## Chi-squared approximation may be incorrect
+
+## Warning in chisq.test(table_cl_compare$wtn.2, p = table_cl_compare$prop.hyp):
+## Chi-squared approximation may be incorrect</code></pre>
+<pre><code>## # A tibble: 8 × 20
+##   var.id       var.hyp wtn.hyp n.hyp prop.hyp base.hyp base_nw.hyp nam.hyp var.2
+##   &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;
+## 1 f11_dinking… bottle…   79.5     68  0.0492     1617.        1617 f11_di… bott…
+## 2 f11_dinking… drinki…  425.     366  0.263      1617.        1617 f11_di… drin…
+## 3 f11_dinking… other_…    8.39    11  0.00519    1617.        1617 f11_di… othe…
+## 4 f11_dinking… person…  271.     414  0.168      1617.        1617 f11_di… pers…
+## 5 f11_dinking… public…  152.     187  0.0937     1617.        1617 f11_di… publ…
+## 6 f11_dinking… tap_dr…  586.     479  0.362      1617.        1617 f11_di… tap_…
+## 7 f11_dinking… techni…    2.97     2  0.00184    1617.        1617 f11_di… &lt;NA&gt; 
+## 8 f11_dinking… trucke…   92.1     90  0.0569     1617.        1617 f11_di… truc…
+## # … with 11 more variables: wtn.2 &lt;dbl&gt;, n.2 &lt;int&gt;, prop.2 &lt;dbl&gt;, base.2 &lt;dbl&gt;,
+## #   base_nw.2 &lt;int&gt;, nam.2 &lt;chr&gt;, indctr &lt;chr&gt;, item &lt;chr&gt;, chi2 &lt;dbl&gt;,
+## #   p &lt;dbl&gt;, H0 &lt;chr&gt;</code></pre>
+<p>Using the function with the multiple responce set</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="analysis.html#cb226-1" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">names</span>(main_dataset)</span>
+<span id="cb226-2"><a href="analysis.html#cb226-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb226-3"><a href="analysis.html#cb226-3" aria-hidden="true" tabindex="-1"></a>f12_names <span class="ot">&lt;-</span> names[<span class="fu">grepl</span>(<span class="st">&quot;f12_drinking_water_treat.&quot;</span>, names)]</span>
+<span id="cb226-4"><a href="analysis.html#cb226-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb226-5"><a href="analysis.html#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="co">#removing empty variables from the MR set</span></span>
+<span id="cb226-6"><a href="analysis.html#cb226-6" aria-hidden="true" tabindex="-1"></a>nz_f12 <span class="ot">&lt;-</span> <span class="fu">non_zero_for_test</span>(f12_names, <span class="st">&quot;strata&quot;</span>, main_dataset, <span class="at">per_cell =</span> F)</span></code></pre></div>
+<pre><code>## 2 variables were removed because of containing zeros in stratas</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="analysis.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(main_dataset[, nz_f12[<span class="dv">4</span>]], main_dataset[, <span class="st">&quot;strata&quot;</span>])</span></code></pre></div>
+<pre><code>##    
+##     20km_rural 20km_urban 5km_rural 5km_urban
+##   0        396        389       395       387
+##   1         11         15         7        17</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="analysis.html#cb230-1" aria-hidden="true" tabindex="-1"></a>f12_sig2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(nz_f12, chi2_GoF, <span class="at">stratum_hyp =</span> <span class="st">&quot;a1_informed_consent&quot;</span>, <span class="at">stratum_2 =</span> <span class="st">&quot;strata&quot;</span>, <span class="at">value_stratum_hyp =</span> <span class="st">&quot;yes&quot;</span>, <span class="at">value_stratum_2 =</span> <span class="st">&quot;5km_rural&quot;</span>, <span class="at">data =</span> main_dataset, <span class="at">weights =</span> <span class="st">&quot;stratum.weight&quot;</span>)</span>
+<span id="cb230-2"><a href="analysis.html#cb230-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb230-3"><a href="analysis.html#cb230-3" aria-hidden="true" tabindex="-1"></a>f12_sig2_df <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(rbind, f12_sig2)</span>
+<span id="cb230-4"><a href="analysis.html#cb230-4" aria-hidden="true" tabindex="-1"></a>f12_sig2_df</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 20
+##    var.id      var.hyp wtn.hyp n.hyp prop.hyp base.hyp base_nw.hyp nam.hyp var.2
+##    &lt;chr&gt;         &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;chr&gt;   &lt;int&gt;
+##  1 f12_drinki…       0 1614.    1615  0.998      1617.        1617 f12_dr…     0
+##  2 f12_drinki…       1    3.23     2  0.00200    1617.        1617 f12_dr…    NA
+##  3 f12_drinki…       0 1420.    1437  0.878      1617.        1617 f12_dr…     0
+##  4 f12_drinki…       1  197.     180  0.122      1617.        1617 f12_dr…     1
+##  5 f12_drinki…       0 1512.    1518  0.935      1617.        1617 f12_dr…     0
+##  6 f12_drinki…       1  105.      99  0.0651     1617.        1617 f12_dr…     1
+##  7 f12_drinki…       0 1559.    1567  0.964      1617.        1617 f12_dr…     0
+##  8 f12_drinki…       1   58.3     50  0.0360     1617.        1617 f12_dr…     1
+##  9 f12_drinki…       0 1222.    1226  0.756      1617.        1617 f12_dr…     0
+## 10 f12_drinki…       1  395.     391  0.244      1617.        1617 f12_dr…     1
+## 11 f12_drinki…       0 1613.    1611  0.998      1617.        1617 f12_dr…     0
+## 12 f12_drinki…       1    3.69     6  0.00228    1617.        1617 f12_dr…     1
+## 13 f12_drinki…       0 1614.    1614  0.998      1617.        1617 f12_dr…     0
+## 14 f12_drinki…       1    2.86     3  0.00177    1617.        1617 f12_dr…    NA
+## 15 f12_drinki…       0  660.     624  0.408      1617.        1617 f12_dr…     0
+## 16 f12_drinki…       1  957.     993  0.592      1617.        1617 f12_dr…     1
+## # … with 11 more variables: wtn.2 &lt;dbl&gt;, n.2 &lt;int&gt;, prop.2 &lt;dbl&gt;, base.2 &lt;dbl&gt;,
+## #   base_nw.2 &lt;int&gt;, nam.2 &lt;chr&gt;, indctr &lt;chr&gt;, item &lt;chr&gt;, chi2 &lt;dbl&gt;,
+## #   p &lt;dbl&gt;, H0 &lt;chr&gt;</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="composite-indicators.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="outputs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
